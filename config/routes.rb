@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  get 'sessions/index'
-  get 'sessions/admin_login'
-  get 'sessions/nomal_login'
+  get '/login', to: 'sessions#login'
+  root to: 'sessions#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

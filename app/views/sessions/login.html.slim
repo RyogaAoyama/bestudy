@@ -1,0 +1,7 @@
+= form_with model: @user, local: true do |f|
+  .form-group
+    = f.text_field :id, id: 'id', class: 'form-control'
+  .form-group
+    = f.password_field :password, id: 'password', class: 'form-control'
+  = f.submit 'ログイン', class: 'btn btn-primary'
+
