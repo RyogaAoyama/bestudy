@@ -17,8 +17,8 @@ describe 'ログインできるか確認' do
     end
     it 'ログイン画面の表示' do
       expect( page ).to have_button 'ログイン'
-      expect( page ).to have_selector '#id', text: ''
-      expect( page ).to have_selector '#password', text: ''
+      expect( page ).to have_selector '#id'
+      expect( page ).to have_selector '#password'
     end
   end
 end
