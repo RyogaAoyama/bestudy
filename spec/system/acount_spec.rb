@@ -13,9 +13,8 @@ describe '利用者のアカウントを作成' do
         before do
           fill_in 'name', with: str
           click_on '登録'
-          puts "before2"
         end
-        it { expect( page ).to have_selector '#nameError', text: '不正な文字が含まれています' }
+        it { expect( page ).to have_content '名前に不正な文字が含まれています' }
         it '次はIDのチェックを実装します！'
       end
     end
@@ -25,7 +24,7 @@ describe '利用者のアカウントを作成' do
         fill_in 'name', with: '  '
         click_on '登録'
       end
-      it { expect( page ).to have_selector '#nameError', text: '名前を入力してください' }
+      it { expect( page ).to have_content '名前を入力してください' }
     end
   end
 
@@ -36,7 +35,7 @@ describe '利用者のアカウントを作成' do
         fill_in 'name', with: 'あああああああああああああああああああああああああああああああ'
         click_on '登録'
       end
-      it { expect( page ).to have_selector '#nameError', text: '30文字以下で入力してください' }
+      it { expect( page ).to have_content '名前は30文字以内で入力してください' }
     end
 
     # 正常パターン
@@ -45,14 +44,14 @@ describe '利用者のアカウントを作成' do
         fill_in 'name', with: 'あ'
         click_on '登録'
       end
-      it { expect( page ).not_to have_selector '#nameError', text: '30文字以下で入力してください' }
+      it { expect( page ).not_to have_content '名前は30文字以内で入力してください' }
     end
     context '30文字の場合' do
       before do
         fill_in 'name', with: 'ああああああああああああああああああああああああああああああ'
         click_on '登録'
       end
-      it { expect( page ).not_to have_selector '#nameError', text: '30文字以下で入力してください' }
+      it { expect( page ).not_to have_content '名前は30文字以内で入力してください' }
     end
   end
 end

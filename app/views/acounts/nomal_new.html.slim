@@ -1,2 +1,9 @@
-h1 Acounts#nomal_new
-p Find me in app/views/acounts/nomal_new.html.slim
+h1 アカウント作成
+
+= form_with model: @user, url: acounts_path, local: true do |f|
+  .form_group
+    = f.label :name
+    = f.text_field :name, id: 'name', class: 'form-control'
+    - get_validate_msg( @user, 'name' )&.each do |msg|
+      p = msg
+  = f.submit nil, class: 'btn btn-primary'
