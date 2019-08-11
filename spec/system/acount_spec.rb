@@ -10,11 +10,11 @@ describe '利用者のアカウントを作成' do
     context '特殊文字のチェック' do
       error_str = %w( , " ' . / \ = ? ! : ; )
       error_str.each do |str|
-        before do
-          fill_in 'name', with: str
+        it do
+          fill_in 'name', with: "あああ#{str}あ"
           click_on '登録'
+          expect( page ).to have_content '名前に不正な文字が含まれています'
         end
-        it { expect( page ).to have_content '名前に不正な文字が含まれています' }
         it '次はIDのチェックを実装します！'
       end
     end
