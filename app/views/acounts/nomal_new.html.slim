@@ -4,6 +4,9 @@ h1 アカウント作成
   .form_group
     = f.label :name
     = f.text_field :name, id: 'name', class: 'form-control'
-    - get_validate_msg( @user, 'name' )&.each do |msg|
-      p = msg
+    p = get_validate_msg( @user, :name )
+
+    = f.label :login_id
+    = f.text_field :login_id, id: 'login_id', class: 'form-control'
+    p = get_validate_msg( @user, :login_id )
   = f.submit nil, class: 'btn btn-primary'

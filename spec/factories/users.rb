@@ -1,9 +1,12 @@
 FactoryBot.define do
   factory :user do
-    name { "MyString" }
-    login_id { "MyString" }
-    answer { "MyString" }
-    password { "MyString" }
+    id { 1 }
+    name { "テストユーザー１" }
+    login_id { "test_user1" }
+    answer { "大元小学校" }
+    password { "test_user1" }
     is_admin { false }
+    secret_question_id {1}
+    #groups_id {1}
   end
 end

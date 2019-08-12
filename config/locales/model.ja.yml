@@ -6,5 +6,6 @@ ja:
     attributes:
       user:
         id: ID
+        login_id: ログインID
         name: 名前
         
