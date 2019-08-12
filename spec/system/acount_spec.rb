@@ -124,4 +124,71 @@ describe '利用者のアカウントを作成' do
       it_behaves_like 'エラーメッセージが表示されている', 'ログインIDはすでに存在します'
     end
   end
+
+  describe 'パスワードの入力チェック' do
+    context '全角入力禁止' do
+      before do
+        fill_in 'password', with: 'あああああああああ'
+        click_on '登録'
+      end
+      it_behaves_like 'エラーメッセージが表示されている', 'パスワードは半角文字で入力してください'
+    end
+
+    #異常パターン
+    context '8文字以上' do
+      before do
+        fill_in 'password', with: 'aa'
+        click_on '登録'
+      end
+      it_behaves_like 'エラーメッセージが表示されている', 'パスワードは8文字以上40文字以内で入力してください'
+    end
+    context '40文字以内' do
+      before do
+        fill_in 'password', with: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+        click_on '登録'
+      end
+      it_behaves_like 'エラーメッセージが表示されている', 'パスワードは8文字以上40文字以内で入力してください'
+    end
+
+    # 正常パターン
+    context '8文字' do
+      before do
+        fill_in 'password', with: 'aaaaaaaa'
+        click_on '登録'
+      end
+      it_behaves_like 'エラーなく正常に動作している', 'パスワードは8文字以上40文字以内で入力してください'
+    end
+    context '40文字' do
+      before do
+        fill_in 'password', with: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+        click_on '登録'
+      end
+      it_behaves_like 'エラーなく正常に動作している', 'パスワードは8文字以上40文字以内で入力してください'
+    end
+
+    context '重複チェック' do
+      before do
+        FactoryBot.create(:secret_question)
+        FactoryBot.create(:user)
+        fill_in 'password', with: User.find(1).password
+        click_on '登録'
+      end
+      it_behaves_like 'エラーメッセージが表示されている', 'パスワードははすでに存在します'
+    end
+
+    context '数字が含まれてない場合' do
+      before do
+        fill_in 'password', with: 'aaaaaaaaa'
+        click_on '登録'
+      end
+      it_behaves_like 'エラーメッセージが表示されている', 'パスワードは英数字を含めてください'
+    end
+    context '英字が含まれていない場合' do
+      before do
+        fill_in 'password', with: '1234567890'
+        click_on '登録'
+      end
+      it_behaves_like 'エラーメッセージが表示されている', 'パスワードは英数字を含めてください'
+    end
+  end
 end
