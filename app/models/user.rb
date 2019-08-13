@@ -12,10 +12,17 @@ class User < ApplicationRecord
     format: { with: /\A[a-zA-Z_0-9]*\z/, message: 'は半角文字で入力してください' },
     length: { in: 6..30, message: 'は6文字以上30文字以内で入力してください' }
 
-  REGEX = /\A[a-zA-Z_0-9]*\z/
-  def id_type_check
-    if id.match(REGEX)
-      errors.add(:login_id, 'は半角文字で入力してください')
+  # password
+  has_secure_password validations: false
+  validates :password, presence: true, confirmation: true
+  validates :password, allow_blank: true, 
+    format: { with: /\A[^,'".\\\/=\?!:;]+\z/, message: 'に不正な文字が含まれています' }
+  validates :password, allow_blank: true,
+    format: { with: /\A[a-zA-Z_0-9]*\z/, message: 'は半角文字で入力してください' }
+  validates :password, allow_blank: true,
+    format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d_]+\z/, message: 'は英数字を含めてください'},
+    length: { in: 8..40, message: 'は8文字以上40文字以内で入力してください' }
+    def password_confirmation_check
+      #TODO: パスワードの一致チェッく
     end
-  end
 end

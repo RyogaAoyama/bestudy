@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_10_071216) do
+ActiveRecord::Schema.define(version: 2019_08_12_072928) do
 
   create_table "groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "regist_id"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2019_08_10_071216) do
     t.string "name", null: false
     t.string "login_id", null: false
     t.string "answer", null: false
-    t.string "password", null: false
+    t.string "password_digest", null: false
     t.boolean "is_admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

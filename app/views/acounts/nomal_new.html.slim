@@ -9,4 +9,12 @@ h1 アカウント作成
     = f.label :login_id
     = f.text_field :login_id, id: 'login_id', class: 'form-control'
     p = get_validate_msg( @user, :login_id )
+
+    = f.label :password
+    = f.password_field :password, id: 'password', class: 'form-control'
+    p = get_validate_msg( @user, :password )
+
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation, id: 'password_confirmation', class: 'form-control'
+    p = get_validate_msg( @user, :password_confirmation )
   = f.submit nil, class: 'btn btn-primary'

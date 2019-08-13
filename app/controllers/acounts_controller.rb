@@ -24,6 +24,6 @@ class AcountsController < ApplicationController
 
   private
   def get_regist_user
-    params.require( :user ).permit( :name, :login_id )
+    params.require( :user ).permit( :name, :login_id, :password, :password_confirmation )
   end
 end
