@@ -10,4 +10,6 @@ ja:
         name: 名前
         password: パスワード
         password_confirmation: 確認
+        secret_question_id: 秘密の質問
+        answer: 回答
         
