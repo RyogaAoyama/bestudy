@@ -1,0 +1,15 @@
+h1 アカウント作成
+
+= form_with model: [:admin, @group], local: true do |f|
+  .form-row
+    .form-group.col-12
+      = f.label :name
+      = f.text_field :name, id: 'group_name', class: 'form-control'
+      p = get_validate_msg( @group, :name )
+
+    .form-group.col-12
+      = f.label :regist_id
+      = f.text_field :regist_id, id: 'regist_id', class: 'form-control'
+      p = get_validate_msg( @group, :regist_id )
+
+    = f.submit nil, class: 'btn btn-primary'

@@ -12,4 +12,7 @@ ja:
         password_confirmation: 確認
         secret_question_id: 秘密の質問
         answer: 回答
+      group:
+        regist_id: グループID
+        name: グループ名
         

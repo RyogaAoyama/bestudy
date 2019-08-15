@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_12_072928) do
+ActiveRecord::Schema.define(version: 2019_08_15_230119) do
 
-  create_table "groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "rooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "regist_id"
     t.string "name"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "users_id"
-    t.index ["user_id"], name: "index_groups_on_user_id"
-    t.index ["users_id"], name: "index_groups_on_users_id"
+    t.index ["user_id"], name: "index_rooms_on_user_id"
+    t.index ["users_id"], name: "index_rooms_on_users_id"
   end
 
   create_table "secret_questions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -43,8 +43,8 @@ ActiveRecord::Schema.define(version: 2019_08_12_072928) do
     t.index ["secret_question_id"], name: "index_users_on_secret_question_id"
   end
 
-  add_foreign_key "groups", "users"
-  add_foreign_key "groups", "users", column: "users_id"
-  add_foreign_key "users", "groups", column: "groups_id"
+  add_foreign_key "rooms", "users"
+  add_foreign_key "rooms", "users", column: "users_id"
+  add_foreign_key "users", "rooms", column: "groups_id"
   add_foreign_key "users", "secret_questions"
 end

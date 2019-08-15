@@ -6,9 +6,6 @@ class AcountsController < ApplicationController
   def index
   end
 
-  def admin_new
-  end
-
   def show
   end
 

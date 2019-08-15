@@ -1,0 +1,34 @@
+h1 アカウント作成
+
+= form_with model: @user, url: admin_acounts_path, local: true do |f|
+  .form-row
+    .form-group.col-12
+      = f.label :name
+      = f.text_field :name, id: 'name', class: 'form-control'
+      p = get_validate_msg( @user, :name )
+
+    .form-group.col-12
+      = f.label :login_id
+      = f.text_field :login_id, id: 'login_id', class: 'form-control'
+      p = get_validate_msg( @user, :login_id )
+
+    .form-group.col-12
+      = f.label :password
+      = f.password_field :password, id: 'password', class: 'form-control'
+      p = get_validate_msg( @user, :password )
+
+    .form-group.col-12
+      = f.label :password_confirmation
+      = f.password_field :password_confirmation, id: 'password_confirmation', class: 'form-control'
+      p = get_validate_msg( @user, :password_confirmation )
+
+    .form-group.col-4
+      = f.label :secret_question_id
+      = f.collection_select :secret_question_id, SecretQuestion.all, :id, :question, {}, { class: 'form-control', id: 'secret_question_id' }
+      p = get_validate_msg( @user, :answer )
+
+    .form-group.col-8
+      / 回答のテキストボックスをセレクトボックスと同じ高さに合わせるため空のlabelを記述
+      label 　
+      = f.text_field :answer, id: 'answer', class: 'form-control'
+    = f.submit '次へ', class: 'btn btn-primary'
