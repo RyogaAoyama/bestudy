@@ -17,13 +17,17 @@ class AcountsController < ApplicationController
 
   def create
     @user = User.new( get_regist_user )
-    @user.valid?
-    p @user.name
-    render :nomal_new
+    if @user.save
+      session[:id] = @user.id
+      flash[:notice] = "登録が完了しました。ようこそ！#{ @user.name }さん！"
+      redirect_to products_path(@user)
+    else
+      render :nomal_new
+    end
   end
 
   private
   def get_regist_user
-    params.require( :user ).permit( :name, :login_id, :password, :password_confirmation, :answer )
+    params.require( :user ).permit( :name, :login_id, :password, :password_confirmation, :secret_question_id, :answer )
   end
 end

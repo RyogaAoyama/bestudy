@@ -1,7 +1,11 @@
-= form_with model: @user, local: true do |f|
+= form_with model: @user, url: login_path, local: true do |f|
   .form-group
-    = f.text_field :id, id: 'id', class: 'form-control'
+    = f.label :login_id
+    = f.text_field :login_id, id: 'login_id', class: 'form-control'
+    p = get_validate_msg( @user, :login_id )
   .form-group
+    = f.label :password
     = f.password_field :password, id: 'password', class: 'form-control'
+    p = get_validate_msg( @user, :password )
   = f.submit 'ログイン', class: 'btn btn-primary'
 

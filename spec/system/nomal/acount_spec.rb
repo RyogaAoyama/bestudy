@@ -172,7 +172,6 @@ describe '利用者のアカウントを作成' do
     describe '重複チェック' do
       context '重複したログインIDが登録された場合' do
         before do
-          FactoryBot.create(:one_question)
           FactoryBot.create(:user)
           fill_in 'login_id', with: User.find(1).login_id
           click_on '登録'
