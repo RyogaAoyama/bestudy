@@ -10,6 +10,7 @@ html
   body
     nav.navbar.navbar-light.bg-light
       .navbar-brand Best Study
+      = link_to 'ログアウト', logout_path
     .container
       - if flash[:notice]
         .alert.alert-success = flash[:notice]

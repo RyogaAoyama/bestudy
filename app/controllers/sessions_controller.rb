@@ -6,6 +6,12 @@ class SessionsController < ApplicationController
     @user = User.new
   end
 
+  def logout
+    session[:id] = nil
+    flash[:alert] = 'ログアウトしました。'
+    redirect_to root_url
+  end
+
   def create
     login_data = get_login_form
     user = User.find_by(login_id: login_data[:login_id])

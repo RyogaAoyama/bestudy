@@ -14,9 +14,9 @@ describe 'ログイン確認' do
     it 'ログイン完了メッセージが表示されている' do
       expect(page).to have_content "ログインに成功しました。ようこそ、#{ user.name }さん！"
     end
-
-    it 'ヘッダーに自分の名前が表示されている' do
-      expect(page).to have_content "#{ user.name }"
+    it 'ログアウトメッセージを出力' do
+      click_on 'ログアウト'
+      expect(page).to have_content 'ログアウトしました。'
     end
   end
 

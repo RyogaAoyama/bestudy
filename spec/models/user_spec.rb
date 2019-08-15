@@ -19,15 +19,18 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe 'ログイン' do
-    let(:user) { User.new( id: '', password: '') }
-    it 'ログインIDの空白チェック' do
-      user.valid?
-      expect(user.errors.messages[:login_id]).to include 'を入力してください'
-    end
-    it 'パスワードの空白チェック' do
-      user.valid?
-      expect(user.errors.messages[:password]).to include 'を入力してください'
+  describe '入力チェック' do
+    
+    describe '空白チェック' do
+      let(:user) { User.new( id: '', password: '') }
+      it '【ログインID】errorsにエラーメッセージが格納される' do
+        user.valid?
+        expect(user.errors.messages[:login_id]).to include 'を入力してください'
+      end
+      it '【パスワード】errorsにエラーメッセージが格納される' do
+        user.valid?
+        expect(user.errors.messages[:password]).to include 'を入力してください'
+      end
     end
   end
 end

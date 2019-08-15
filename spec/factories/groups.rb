@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :group do
-    regist_id { "MyString" }
-    name { "MyString" }
+    id { 1 }
+    regist_id { "test_group" }
+    name { "青山稜河" }
   end
 end
