@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe 'GET #logout' do
   before do
+    FactoryBot.create(:secret_question)
     FactoryBot.create(:user)
   end
 
