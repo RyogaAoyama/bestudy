@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Admin::GroupsController, type: :controller do
+RSpec.describe Admin::RoomsController, type: :controller do
 
   describe "GET #new" do
     it "returns http success" do

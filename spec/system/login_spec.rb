@@ -4,6 +4,7 @@ describe 'ログイン確認' do
   
   context 'ユーザー認証に成功した場合' do
     before do
+      FactoryBot.create(:secret_question)
       visit login_path
       fill_in 'login_id', with: user.login_id
       fill_in 'password', with: user.password

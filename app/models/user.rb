@@ -4,7 +4,7 @@ class User < ApplicationRecord
   validates :name, allow_blank: true, format: { with: /\A[^,'".\\\/=\?!:;]+\z/,
     message: 'に不正な文字が含まれています' }
 
-  # ID
+  # ログインID
   validates :login_id, presence: true, uniqueness: true
   validates :login_id, allow_blank: true, 
     format: { with: /\A[^,'".\\\/=\?!:;]+\z/, message: 'に不正な文字が含まれています' }

@@ -2,7 +2,7 @@ ja:
   activerecord:
     models:
       user: ユーザー
-      group: グループ
+      room: ルーム
     attributes:
       user:
         id: ID
@@ -12,7 +12,7 @@ ja:
         password_confirmation: 確認
         secret_question_id: 秘密の質問
         answer: 回答
-      group:
-        regist_id: グループID
-        name: グループ名
+      room:
+        regist_id: ルームID
+        name: ルーム名
         

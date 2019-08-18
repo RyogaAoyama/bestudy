@@ -4,22 +4,22 @@ h1 アカウント作成
   .form-row
     .form-group.col-12
       = f.label :name
-      = f.text_field :name, id: 'name', class: 'form-control'
+      = f.text_field :name, id: 'name', class: 'form-control', placeholder: '名前は30文字以内で入力してください'
       p = get_validate_msg( @user, :name )
 
     .form-group.col-12
       = f.label :login_id
-      = f.text_field :login_id, id: 'login_id', class: 'form-control'
+      = f.text_field :login_id, id: 'login_id', class: 'form-control', placeholder: 'ログインIDは6文字以上30文字以下で入力してください'
       p = get_validate_msg( @user, :login_id )
 
     .form-group.col-12
       = f.label :password
-      = f.password_field :password, id: 'password', class: 'form-control'
+      = f.password_field :password, id: 'password', class: 'form-control', placeholder: 'パスワードは8文字以上40文字以内で入力してください'
       p = get_validate_msg( @user, :password )
 
     .form-group.col-12
       = f.label :password_confirmation
-      = f.password_field :password_confirmation, id: 'password_confirmation', class: 'form-control'
+      = f.password_field :password_confirmation, id: 'password_confirmation', class: 'form-control', placeholder: 'もう一度パスワードを入力してください'
       p = get_validate_msg( @user, :password_confirmation )
 
     .form-group.col-4
@@ -30,5 +30,7 @@ h1 アカウント作成
     .form-group.col-8
       / 回答のテキストボックスをセレクトボックスと同じ高さに合わせるため空のlabelを記述
       label 　
-      = f.text_field :answer, id: 'answer', class: 'form-control'
+      = f.text_field :answer, id: 'answer', class: 'form-control', placeholder: '回答を入力してください'
+
+      = f.hidden_field :is_admin, value: true
     = f.submit '次へ', class: 'btn btn-primary'

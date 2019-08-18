@@ -12,10 +12,10 @@ class Admin::AcountsController < ApplicationController
   def create
     @user = User.new( get_regist_user )
     if @user.valid?
-      # グループ作成の時に一緒にユーザーを登録するため
+      # ルーム作成の時に一緒にユーザーを登録するため
       # 一旦セッションにユーザー情報格納
       session[:user] = @user
-      redirect_to new_admin_group_url
+      redirect_to new_admin_room_url
     else
       render :new
     end
@@ -23,6 +23,7 @@ class Admin::AcountsController < ApplicationController
 
   private
   def get_regist_user
-    params.require( :user ).permit( :name, :login_id, :password, :password_confirmation, :secret_question_id, :answer )
+    params.require( :user ).permit( :name, :login_id, :password, :password_confirmation,
+       :secret_question_id, :answer, :is_admin )
   end
 end

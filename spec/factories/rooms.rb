@@ -1,7 +1,7 @@
 FactoryBot.define do
-  factory :group do
+  factory :room do
     id { 1 }
-    regist_id { "test_group" }
+    regist_id { "test_room" }
     name { "青山稜河" }
   end
 end

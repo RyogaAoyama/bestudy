@@ -1,0 +1,15 @@
+h1 アカウント作成
+
+= form_with model: [:admin, @room], local: true do |f|
+  .form-row
+    .form-room.col-12
+      = f.label :name
+      = f.text_field :name, id: 'room_name', class: 'form-control'
+      p = get_validate_msg( @room, :name )
+
+    .form-room.col-12
+      = f.label :regist_id
+      = f.text_field :regist_id, id: 'regist_id', class: 'form-control'
+      p = get_validate_msg( @room, :regist_id )
+
+    = f.submit nil, class: 'btn btn-primary'

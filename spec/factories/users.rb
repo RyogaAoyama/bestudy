@@ -7,6 +7,6 @@ FactoryBot.define do
     password { "test_user1" }
     is_admin { false }
     secret_question_id {1}
-    #groups_id {1}
+    #rooms_id {1}
   end
 end

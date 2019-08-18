@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   namespace :admin do
-    resources :groups
+    resources :rooms
   end
 
   namespace :admin do
