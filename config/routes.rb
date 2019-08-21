@@ -1,15 +1,10 @@
 Rails.application.routes.draw do
   namespace :admin do
     resources :rooms
-  end
-
-  namespace :admin do
     resources :acounts
-  end
-
-  namespace :admin do
     resources :products
   end
+  get 'admin/acount/:id/profile_edit', to: 'admin/acounts#edit_profile', as: 'edit_profile_admin_acount'
 
   get 'products/:id/index',   to: 'products#index',  as: 'products'
   get 'products/:id/buy',     to: 'products#buy',    as: 'product_buy'

@@ -12,6 +12,7 @@ ja:
         password_confirmation: 確認
         secret_question_id: 秘密の質問
         answer: 回答
+        image: プロフィール画像
       room:
         regist_id: ルームID
         name: ルーム名

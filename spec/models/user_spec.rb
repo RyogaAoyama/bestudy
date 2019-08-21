@@ -35,5 +35,23 @@ RSpec.describe User, type: :model do
         expect(user.errors.messages[:password]).to include 'を入力してください'
       end
     end
+    describe '拡張子チェック' do
+      it '【プロフィール画像】ファイルがアップロードできる'
+      it '【プロフィール画像】errorsにエラーメッセージが表示される'
+    end
+  end
+
+  describe 'アカウント情報の編集' do
+    before do
+      FactoryBot.create(:user)
+    end
+    let(:user) { User.find(1) }
+    # TODO:値変更のテストコードわからん
+    xit 'パスワードの変更' do
+      expect{ 
+        user.password = 'aaaaaaaa1'
+        user.password_confirmation = 'aaaaaaaa1'
+       }.to change{ user.password_digest }.to change{ user.update! }
+    end
   end
 end

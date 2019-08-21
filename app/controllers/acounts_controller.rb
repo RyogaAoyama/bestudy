@@ -13,7 +13,7 @@ class AcountsController < ApplicationController
   end
 
   def create
-    @user = User.new( get_regist_user )
+    @user = User.new(get_regist_user)
     if @user.save
       session[:id] = @user.id
       flash[:notice] = "登録が完了しました。ようこそ！#{ @user.name }さん！"
@@ -25,6 +25,13 @@ class AcountsController < ApplicationController
 
   private
   def get_regist_user
-    params.require( :user ).permit( :name, :login_id, :password, :password_confirmation, :secret_question_id, :answer )
+    params.require(:user).permit(
+      :name,
+      :login_id,
+      :password,
+      :password_confirmation,
+      :secret_question_id,
+      :answer
+    )
   end
 end

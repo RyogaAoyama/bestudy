@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
   # ログイン中のユーザー情報を取得
   def current_user
-    if session[:id] == params[:id].to_i
+    if session[:id]
       @current_user ||= User.find_by(id: session[:id])
     end
   end

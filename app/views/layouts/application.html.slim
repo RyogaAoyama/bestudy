@@ -10,7 +10,13 @@ html
   body
     nav.navbar.navbar-light.bg-light
       .navbar-brand Best Study
-      = link_to 'ログアウト', logout_path
+      
+      - if current_user
+        = link_to 'ログアウト', logout_path
+        = link_to current_user.name, admin_acount_path(current_user), id:'user_name'
+      / TODO:プロフィール画像が登録できない問題
+        /= image_tag current_user.image, class: "rounded-circle", width: "33", height: "33" 
+
     .container
       - if flash[:notice]
         .alert.alert-success = flash[:notice]

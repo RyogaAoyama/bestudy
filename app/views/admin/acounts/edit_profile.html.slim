@@ -1,0 +1,12 @@
+h1 プロフィール編集
+= form_with model: @user, url: admin_acount_path, local: true do |f|
+  .form-group
+    = f.label :name
+    = f.text_field :name, id: 'name', class: 'form-control', placeholder: '名前は30文字以内で入力してください'
+    p = get_validate_msg( @user, :name )
+
+  / .form-group
+  /   = f.label :image
+  /   = f.file_field :image, name: 'profile_img', class: 'form-group'
+  /   p = get_validate_msg( @user, :image )
+  = f.submit '保存', class: 'btn btn-primary'

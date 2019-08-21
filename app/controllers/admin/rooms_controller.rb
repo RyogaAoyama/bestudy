@@ -16,6 +16,7 @@ class Admin::RoomsController < ApplicationController
     # userのvalidateチェックは前画面でしているのでここでは必要ない
     if @room.save && user.save(validate: false)
       flash[:notice] = "登録が完了しました。ようこそ！#{ user.name }さん！"
+      session[:id] = user.id
       redirect_to admin_products_url
     else
       render :new

@@ -6,11 +6,12 @@ class Admin::AcountsController < ApplicationController
   def show
   end
 
-  def edit
+  def edit_profile
+    @user = User.find(params[:id])
   end
 
   def create
-    @user = User.new( get_regist_user )
+    @user = User.new(user_params)
     if @user.valid?
       # ルーム作成の時に一緒にユーザーを登録するため
       # 一旦セッションにユーザー情報格納
@@ -21,9 +22,27 @@ class Admin::AcountsController < ApplicationController
     end
   end
 
+  def update
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      flash[:notice] = '編集内容を保存しました'
+      redirect_to admin_acount_url(params[:id])
+    else
+      render :edit_profile
+    end
+  end
+
   private
-  def get_regist_user
-    params.require( :user ).permit( :name, :login_id, :password, :password_confirmation,
-       :secret_question_id, :answer, :is_admin )
+  def user_params
+    params.require(:user).permit(
+      :name,
+      :login_id,
+      :password,
+      :password_confirmation,
+      :secret_question_id,
+      :answer,
+      :is_admin,
+      :image
+    )
   end
 end
