@@ -114,39 +114,47 @@ describe 'アカウントの編集' do
       context 'エラーパターン' do
         before do
           click_on 'パスワード変更'
-          fill_in  ''
-          click_on '確認'
+          fill_in  'password', with: ' '
+          click_on '認証'
         end
-        it { expect(page).to have_content 'パスワードを入力してください' }
         it { expect(page).to have_content 'パスワードが一致しません' }
       end
       context '正常パターン' do
-        it { expect(current_url).to eq 'admin/acount/1/password_edit' }
+        before do
+          click_on 'パスワード変更'
+          fill_in  'password', with: 'test_user1'
+          click_on '認証'
+        end
+        it { expect(current_path).to eq edit_password_admin_acount_path(user) }
       end
     end
 
     context '変更' do
+      before do
+        click_on 'パスワード変更'
+        fill_in  'password', with: 'test_user1'
+        click_on '認証'
+      end
       context 'エラーパターン' do
         before do
-          click_on 'パスワード変更'
-          fill_in  ''
-          click_on '確認'
+          fill_in  'password',              with: ' '
+          fill_in  'password_confirmation', with: 'test_user1'
+          click_on '変更'
         end
         it { expect(page).to have_content 'パスワードを入力してください' }
         it { expect(page).to have_content '確認とパスワードの入力が一致しません' }
       end
       context '正常パターン' do
         before do
-          click_on 'パスワード変更'
-          fill_in  'passowrd',              with: 'aaaaaaa222'
+          fill_in  'password',              with: 'aaaaaaa222'
           fill_in  'password_confirmation', with: 'aaaaaaa222'
           click_on '変更'
         end
-        it 'パスワードが変更されている'
-        it { expect(current_path).to admin_product(user) }
-        it { expect(page).to have_content 'パスワードを変更しました' }
+        it { expect(current_path).to eq admin_acount_path(user) }
+        it { expect(page).to have_content '編集内容を保存しました' }
       end
     end
+
     describe '秘密の質問' do
       context '認証' do
         context 'エラーパターン' do

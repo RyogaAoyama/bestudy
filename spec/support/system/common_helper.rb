@@ -7,6 +7,6 @@ module CommonHelper
     fill_in 'login_id', with: user.login_id
     fill_in 'password', with: user.password
     click_on 'ログイン'
-    "成功"
+    p "ログイン成功"
   end
 end

@@ -1,0 +1,7 @@
+h1 認証
+= form_with model: @user, method: :post, url: edit_password_admin_acount_path(current_user), local: true do |f|
+  .form-group.col-12
+    = f.label :password
+    = f.password_field :password, id: 'password', class: 'form-control'
+    p = get_validate_msg(@user, :password)
+  = f.submit '認証', class: 'btn btn-primary'

@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    login_data = get_login_form
+    login_data = get_login_params
     user = User.find_by(login_id: login_data[:login_id])
     if user&.authenticate(login_data[:password])
       session[:id] = user.id
@@ -27,7 +27,7 @@ class SessionsController < ApplicationController
   end
 
   private
-  def get_login_form
+  def get_login_params
     params.require(:user).permit(:login_id, :password)
   end
 end
