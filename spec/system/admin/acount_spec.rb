@@ -157,7 +157,6 @@ describe 'アカウントの編集' do
           it '秘密の質問変更画面へ遷移している'
         end
       end
-  
       context '変更' do
         context 'エラーパターン' do
           it 'エラーメッセージが表示される'
