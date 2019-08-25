@@ -154,26 +154,44 @@ describe 'アカウントの編集' do
         it { expect(page).to have_content '編集内容を保存しました' }
       end
     end
-
-    describe '秘密の質問' do
-      context '認証' do
-        context 'エラーパターン' do
-          it 'エラーメッセージが表示される'
-          it '入力した値が保持されていること'
+  end
+  describe '秘密の質問' do
+    context '認証' do
+      context 'エラーパターン' do
+        before do
+          click_on '秘密の質問'
+          fill_in  'password', with: ' '
+          click_on '認証'
         end
-        context '正常パターン' do
-          it '秘密の質問変更画面へ遷移している'
-        end
+        it { expect(page).to have_content 'パスワードが一致しません' }
       end
-      context '変更' do
-        context 'エラーパターン' do
-          it 'エラーメッセージが表示される'
+      context '正常パターン' do
+        before do
+          click_on '秘密の質問'
+          fill_in  'password', with: 'test_user1'
+          click_on '認証'
         end
-        context '正常パターン' do
-          it '秘密の質問が変更されている'
-          it 'アカウント詳細画面に遷移している'
-          it '秘密の質問変更完了のメッセージが出力されている'
+        it { expect(current_path).to eq edit_question_admin_acount_path(user) }
+      end
+    end
+
+    context '変更' do
+      context 'エラーパターン' do
+        before do
+          fill_in  'answer', with: ' '
+          click_on '変更'
         end
+        it { expect(page).to have_content '回答を入力してください' }
+      end
+      context '正常パターン' do
+        before do
+          FactoryBot.create(:secret_question2)
+          fill_in 'answer', with: '京都行きたい'
+          select '学生時代に好きだった人の名前', from: 'questions'
+          click_on '変更'
+        end
+        it { expect(current_path).to eq admin_acount_path(user) }
+        it { expect(page).to have_content '編集内容を保存しました' }
       end
     end
   end
