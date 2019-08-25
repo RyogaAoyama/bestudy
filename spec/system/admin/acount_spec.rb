@@ -171,11 +171,18 @@ describe 'アカウントの編集' do
           fill_in  'password', with: 'test_user1'
           click_on '認証'
         end
+        # 秘密の質問変更画面に遷移しているかチェック
         it { expect(current_path).to eq edit_question_admin_acount_path(user) }
       end
     end
 
     context '変更' do
+      before do
+        FactoryBot.create(:secret_question2)
+        click_on '秘密の質問'
+        fill_in  'password', with: 'test_user1'
+        click_on '認証'
+      end
       context 'エラーパターン' do
         before do
           fill_in  'answer', with: ' '
@@ -185,9 +192,8 @@ describe 'アカウントの編集' do
       end
       context '正常パターン' do
         before do
-          FactoryBot.create(:secret_question2)
-          fill_in 'answer', with: '京都行きたい'
-          select '学生時代に好きだった人の名前', from: 'questions'
+          fill_in  'answer', with: '京都行きたい'
+          select   '学生時代に好きだった人の名前', from: 'secret_question_id'
           click_on '変更'
         end
         it { expect(current_path).to eq admin_acount_path(user) }

@@ -24,7 +24,6 @@ class Admin::AcountsController < ApplicationController
       @user = current_user
     else
       flash[:alert] = 'パスワードが一致しません'
-      # TODO:renderでやると認証画面で更新かけたときにルーティングエラーでる。URLがedit_passwordに変わるから
       redirect_to authentication_admin_acount_path(current_user)
     end
   end
@@ -67,9 +66,7 @@ class Admin::AcountsController < ApplicationController
     end
   end
 
-  # パスワード以外アップデート。
-  # パスワードのバリデーションもかけてしまうとバリデーションエラーが出るため分けている。
-  # モデルでパスワードのバリデーションを無効にしている
+  # 名前アップデート
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
@@ -80,6 +77,7 @@ class Admin::AcountsController < ApplicationController
     end
   end
 
+  # 秘密の質問アップデート
   def update_question
     @user = User.find(params[:id])
     if @user.update(user_params)
