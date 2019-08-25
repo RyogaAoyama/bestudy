@@ -4,12 +4,21 @@ Rails.application.routes.draw do
     resources :acounts
     resources :products
   end
-  get 'admin/acount/:id/edit_profile',   to: 'admin/acounts#edit_profile',   as: 'edit_profile_admin_acount'
-  get 'admin/acount/:id/authentication', to: 'admin/acounts#authentication', as: 'authentication_admin_acount'
+  get 'admin/acount/:id/edit_profile',
+      to: 'admin/acounts#edit_profile',
+      as: 'edit_profile_admin_acount'
+  get 'admin/acount/:id/authentication',
+      to: 'admin/acounts#authentication',
+      as: 'authentication_admin_acount'
+  get 'admin/acount/:id/authentication_question',
+      to: 'admin/acounts#authentication_question',
+      as: 'authentication_question_admin_acount'
 
   post 'admin/acount/:id/edit_password', to: 'admin/acounts#edit_password', as: 'edit_password_admin_acount'
+  post 'admin/acount/:id/edit_question', to: 'admin/acounts#edit_question', as: 'edit_question_admin_acount'
 
   patch 'admin/acount/:id/update_password', to: 'admin/acounts#update_password', as: 'update_password_admin_acount'
+  patch 'admin/acount/:id/update_question', to: 'admin/acounts#update_question', as: 'update_question_admin_acount'
 
   get 'products/:id/index',   to: 'products#index',  as: 'products'
   get 'products/:id/buy',     to: 'products#buy',    as: 'product_buy'

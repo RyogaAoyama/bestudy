@@ -14,6 +14,21 @@ class Admin::AcountsController < ApplicationController
     @user = current_user
   end
 
+  def authentication_question
+    @user = current_user
+  end
+
+  def edit_question
+    @user = User.new(user_params)
+    if current_user&.authenticate(@user.password)
+      @user = current_user
+    else
+      flash[:alert] = 'パスワードが一致しません'
+      # TODO:renderでやると認証画面で更新かけたときにルーティングエラーでる。URLがedit_passwordに変わるから
+      redirect_to authentication_admin_acount_path(current_user)
+    end
+  end
+
   def edit_password
     @user = User.new(user_params)
     if current_user&.authenticate(@user.password)
@@ -62,6 +77,16 @@ class Admin::AcountsController < ApplicationController
       redirect_to admin_acount_url(params[:id])
     else
       render :edit_profile
+    end
+  end
+
+  def update_question
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      flash[:notice] = '編集内容を保存しました'
+      redirect_to admin_acount_url(params[:id])
+    else
+      render :edit_question
     end
   end
 
