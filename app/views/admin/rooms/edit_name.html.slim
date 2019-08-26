@@ -1,0 +1,8 @@
+h1 ルーム編集
+= form_with model: @room, url: update_name_admin_room_path, local: true do |f|
+  .form-row
+    .form-room.col-12
+      = f.label :name
+      = f.text_field :name, id: 'room_name', class: 'form-control'
+      p = get_validate_msg(@room, :name)
+    = f.submit '変更', class: 'btn btn-primary'

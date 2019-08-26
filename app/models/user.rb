@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_one_attached :image
+  has_one :room
   # 名前
   validates :name, presence: true, length: { maximum: 30 }
   validates :name, allow_blank: true, format: { with: /\A[^,'".\\\/=\?!:;]+\z/,

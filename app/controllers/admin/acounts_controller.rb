@@ -7,7 +7,7 @@ class Admin::AcountsController < ApplicationController
   end
 
   def edit_profile
-    @user = User.find(params[:id])
+    @user = current_user
   end
 
   def authentication
@@ -55,7 +55,7 @@ class Admin::AcountsController < ApplicationController
   def update_password
     @user = User.find(params[:id])
     @user.attributes = ({
-      password: user_params[:password],
+      password:              user_params[:password],
       password_confirmation: user_params[:password_confirmation]
     })
     if @user.save(context: :password_only)

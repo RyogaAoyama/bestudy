@@ -3,3 +3,4 @@ p Find me in app/views/acounts/show.html.slimaaa
 = link_to 'プロフィール編集', edit_profile_admin_acount_path(current_user), name: 'user_name' ,class: 'btn btn-primary'
 = link_to 'パスワード変更', authentication_admin_acount_path(current_user), class: 'btn btn-primary'
 = link_to '秘密の質問', authentication_question_admin_acount_path(current_user), class: 'btn btn-primary'
+= link_to 'ルーム編集', admin_room_path(current_user), class: 'btn btn-primary'
