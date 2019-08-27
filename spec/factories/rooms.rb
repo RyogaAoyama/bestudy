@@ -3,6 +3,6 @@ FactoryBot.define do
     id { 1 }
     regist_id { "test_room" }
     name { "test_room" }
-    users_id { 1 }
+    user_id { 1 }
   end
 end

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get 'admin/acount/:id/authentication_question',
       to: 'admin/acounts#authentication_question',
       as: 'authentication_question_admin_acount'
+  get 'admin/acount/:id/destroy_modal', to: 'admin/acounts#destroy_modal', as: 'destroy_modal_admin_acount'
 
   get 'admin/room/:id/edit_name', to: 'admin/rooms#edit_name', as: 'edit_name_admin_room'
 

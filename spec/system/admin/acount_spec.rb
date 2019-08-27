@@ -203,46 +203,35 @@ describe 'アカウントの編集' do
   end
 
   describe 'アカウント削除' do
-    context '削除モーダル' do
-      before { click_on 'アカウント削除' }
-      # TODO: 必ずセレクタ名を直すこと。現状は仮のセレクタ名
+    before { click_on 'アカウント削除' }
+    describe '削除モーダル' do
       it '戻るボタンを押下したらモーダルが消える' do
         click_on '戻る'
         expect(page).to_not have_selector '#modal'
       end
-      it 'バツボタンを押下モーダルが消える' do
-        click_on 'batu'
+      it 'バツボタンを押下したらモーダルが消える' do
+        find('#close').click
         expect(page).to_not have_selector '#modal'
       end
       it 'モーダル外を押下したらモーダルが消える' do
-        click_on 'outer'
+        find('#modal_outer').click
         expect(page).to_not have_selector '#modal'
       end
     end
 
-    context '削除' do
-      before do
-        click_on 'アカウント削除'
-        click_on 'アカウントを削除'
-      end
-      it 'アカウントデータが削除されている' do
-        expect(User.find(1)).to eq nil
-      end
-      it 'ルームが削除されている' do
-        expect(Room.find_by(user_id: 1)).to eq nil
-      end
-      # TODO: テスト書いてないところは機能が実装でき次第かく
-      it '科目が削除されている'
-      it '商品が削除されている'
-      it '商品リクエストが削除されている'
-      it 'お知らせが削除されている'
-      it 'ユーザー申請が削除されている'
-      it 'ホーム画面へ遷移している' do
-        expect(current_path).to eq root_path
-      end
-      it '削除完了メッセージを表示する' do
-        expect(page).to have_content 'アカウントを削除しました。ご利用ありがとうございました！'
-      end
+      
+    it 'アカウントデータと関連データが削除されている' do
+      click_on 'アカウントを削除'
+      expect(User.find_by(id: 1)).to eq nil           # アカウント
+      expect(Room.find_by(user_id: 1)).to eq nil      # ルーム
     end
+    # TODO: テスト書いてないところは機能が実装でき次第かく。expectは上記のitに記述する
+    it '科目が削除されている'
+    it '商品が削除されている'
+    it '商品リクエストが削除されている'
+    it 'お知らせが削除されている'
+    it 'ユーザー申請が削除されている'
+    it { expect(current_path).to eq root_path }
+    it { expect(page).to have_content 'アカウントを削除しました。ご利用ありがとうございました！' }
   end
 end

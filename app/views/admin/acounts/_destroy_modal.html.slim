@@ -1,0 +1,14 @@
+div class="modal-dialog modal-dialog-centered" id="modal_outer"
+  div class="modal-content"
+    div class="modal-header"
+      h5 class="modal-title" id="label1"
+        strong 警告
+      button type="button" class="close" data-dismiss="modal" aria-label="Close"
+        span aria-hidden="true" id="close" &times;
+    div class="modal-body"
+      div 一度削除したアカウントは復元できません。
+      p ルームに所属している利用者のポイントも全て失われます。
+      div 本当に削除しますか？
+    div class="modal-footer"
+      button type="button" class="btn btn-secondary" data-dismiss="modal"戻る
+      = link_to 'アカウントを削除', admin_acount_path(current_user), method: :delete, class: "btn btn-danger"

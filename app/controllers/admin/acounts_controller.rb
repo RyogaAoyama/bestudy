@@ -88,6 +88,13 @@ class Admin::AcountsController < ApplicationController
     end
   end
 
+  def destroy
+    current_user.destroy
+    flash[:alert] = 'アカウントを削除しました。ご利用ありがとうございました！'
+    redirect_to root_path
+    session[:id] = nil
+  end
+
   private
   def user_params
     params.require(:user).permit(
