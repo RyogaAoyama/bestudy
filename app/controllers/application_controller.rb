@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   helper_method :get_validate_msg, :current_user
+  before_action :no_correct_access
 
   # エラーメッセージがあった場合エラーメッセージを返却
   def get_validate_msg( model, key )
@@ -15,6 +16,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # 認証していないユーザーからのアクセスをブロック
   def no_correct_access
     unless current_user
       redirect_to login_url

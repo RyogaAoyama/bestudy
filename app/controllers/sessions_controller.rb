@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  skip_before_action :no_correct_access
   def index
   end
 

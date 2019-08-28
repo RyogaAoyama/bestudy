@@ -1,4 +1,5 @@
 class AcountsController < ApplicationController
+  skip_before_action :no_correct_access, only: [:nomal_new, :create, :index]
   def nomal_new
     @user = User.new
   end

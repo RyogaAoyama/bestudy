@@ -1,4 +1,5 @@
 class Admin::AcountsController < ApplicationController
+  skip_before_action :no_correct_access, only: [:new, :create]
   def new
     @user = User.new
   end

@@ -1,4 +1,8 @@
 h1 アカウント詳細
+div ="名前：#{ current_user.name }"
+div ="ID：#{ current_user.login_id }"
+div ="ルームID：#{ current_user.room.regist_id }"
+
 
 = link_to 'プロフィール編集', edit_profile_admin_acount_path(current_user), name: 'user_name' ,class: 'btn btn-primary'
 = link_to 'パスワード変更', authentication_admin_acount_path(current_user), class: 'btn btn-primary'
