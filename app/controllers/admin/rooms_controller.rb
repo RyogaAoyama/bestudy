@@ -1,4 +1,5 @@
 class Admin::RoomsController < ApplicationController
+  skip_before_action :no_correct_access, only: [:new, :create]
   def new
     @room = Room.new
   end

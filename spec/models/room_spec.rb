@@ -2,20 +2,25 @@ require 'rails_helper'
 
 RSpec.describe Room, type: :model do
   describe '登録' do
-    FactoryBot.create(:room)
-    room = Room.all[0]
+    before(:all) do
+      @room = create_room
+    end
+    #room = Room.find(1)
+    #p Room.all
 
     it 'ルーム名が保存されている' do
-      expect(room.name).to eq '青山稜河'
+      expect(@room.name).to eq 'test_room'
     end
     it 'ルームIDが保存されている' do
-      expect(room.regist_id).to eq 'test_room'
+      expect(@room.regist_id).to eq 'test_room'
     end
     it 'IDが保存されている' do
-      expect(room.id).to eq 1
+      expect(@room.id).to eq 1
     end
 
-    after(:all) { Room.find(room.id).destroy }
+    after(:all) do
+      remove_room
+    end
   end
 
   describe 'エラーチェック' do
@@ -76,10 +81,10 @@ RSpec.describe Room, type: :model do
 
     describe '重複チェック' do
       before do
-        FactoryBot.create(:room, regist_id: 'testtest')
+        create_room
       end
       it '【ルームID】errorsにエラーメッセージが格納される' do
-        room.regist_id = 'testtest'
+        room.regist_id = 'test_room'
         room.valid?
         expect(err_messages).to include 'はすでに存在します'
       end

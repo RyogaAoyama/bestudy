@@ -231,7 +231,13 @@ describe 'アカウントの編集' do
     it '商品リクエストが削除されている'
     it 'お知らせが削除されている'
     it 'ユーザー申請が削除されている'
-    it { expect(current_path).to eq root_path }
-    it { expect(page).to have_content 'アカウントを削除しました。ご利用ありがとうございました！' }
+    it 'ホーム画面へ遷移' do
+      click_on 'アカウントを削除'
+      expect(current_path).to eq root_path
+    end
+    it '削除完了メッセージが表示される' do
+      click_on 'アカウントを削除'
+      expect(page).to have_content 'アカウントを削除しました。ご利用ありがとうございました！'
+    end
   end
 end

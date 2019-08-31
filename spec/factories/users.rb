@@ -6,7 +6,6 @@ FactoryBot.define do
     answer { "大元小学校" }
     password { "test_user1" }
     is_admin { false }
-    secret_question_id {1}
-    #rooms_id {1}
+    secret_question_id { 1 }
   end
 end
