@@ -16,4 +16,8 @@ ja:
       room:
         regist_id: ルームID
         name: ルーム名
+      product:
+        name: 商品名
+        point: ポイント
+        product_img: 商品イメージ
         

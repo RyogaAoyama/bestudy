@@ -19,7 +19,11 @@ class SessionsController < ApplicationController
     if user&.authenticate(login_data[:password])
       session[:id] = user.id
       flash[:notice] = "ログインに成功しました。ようこそ、#{ user.name }さん！"
-      redirect_to products_path(user)
+      if user.is_admin
+        redirect_to admin_products_path(user)
+      else
+        redirect_to products_path(user)
+      end
     else
       @user = User.new(login_id: login_data[:login_id])
       flash[:alert] = 'ログインIDとパスワードが一致しません'
