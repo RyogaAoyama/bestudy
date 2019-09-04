@@ -1,17 +1,2 @@
 h1 商品登録
-= form_with model: [:admin, @product], local: true do |f|
-  .form-group
-    = f.label :name
-    = f.text_field :name, class: 'form-control', id: 'name'
-    p = get_validate_msg( @product, :name )
-
-    = f.label :point
-    = f.text_field :point, class: 'form-control', id: 'point'
-    p = get_validate_msg( @product, :point )
-
-    = f.label :product_img
-    = f.file_field :product_img, class: 'form-control', id: 'product_img', onchange: 'imagePrev(event)'
-    p = get_validate_msg( @product, :product_img )
-
-    img#prev
-  = f.submit nil, class: 'btn btn-primary'
+= render partial: "form", locals: { product: @product }

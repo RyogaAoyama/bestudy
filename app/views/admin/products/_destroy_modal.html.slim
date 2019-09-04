@@ -1,0 +1,13 @@
+div class="modal-dialog modal-dialog-centered" id="modal_outer"
+  div class="modal-content"
+    div class="modal-header"
+      h5 class="modal-title" id="label1"
+        strong 注意
+      button type="button" class="close" data-dismiss="modal" aria-label="Close"
+        span aria-hidden="true" id="close" &times;
+    div class="modal-body"
+      div この商品を削除します。
+      p よろしいですか？
+    div class="modal-footer"
+      button type="button" class="btn btn-secondary" data-dismiss="modal"戻る
+      = link_to '商品を削除', set_deleted_admin_product_path(@product), method: :patch, class: "btn btn-danger"

@@ -138,3 +138,11 @@ describe "バリデーション" do
     end
   end
 end
+
+describe '#exec_delete' do
+  before { @product = create_product }
+  it 'Product.is_deletedがtrueに更新される' do
+    exec_delete
+    expect(@product.is_deleted).to eq true
+  end
+end

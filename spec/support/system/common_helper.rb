@@ -10,4 +10,12 @@ module CommonHelper
     click_on 'ログイン'
     p "ログイン成功"
   end
+
+  # def product_regist
+  #   click_on 'plus'
+  #   fill_in  'name',  with: '商品名'
+  #   fill_in  'point', with: 300
+  #   attach_file 'product_img', 'public/test.jpg'
+  #   click_on '登録'
+  # end
 end

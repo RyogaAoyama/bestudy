@@ -4,9 +4,9 @@ Rails.application.routes.draw do
     resources :acounts
     resources :products
   end
-  get 'admin/acount/:id/edit_profile',  to: 'admin/acounts#edit_profile',  as: 'edit_profile_admin_acount'
-  get 'admin/acount/:id/authentication',to: 'admin/acounts#authentication',as: 'authentication_admin_acount'
-  get 'admin/acount/:id/destroy_modal', to: 'admin/acounts#destroy_modal', as: 'destroy_modal_admin_acount'
+  get 'admin/acount/:id/edit_profile' ,  to: 'admin/acounts#edit_profile' ,  as: 'edit_profile_admin_acount'
+  get 'admin/acount/:id/authentication', to: 'admin/acounts#authentication', as: 'authentication_admin_acount'
+  get 'admin/acount/:id/destroy_modal' , to: 'admin/acounts#destroy_modal' , as: 'destroy_modal_admin_acount'
   get 'admin/acount/:id/authentication_question',
       to: 'admin/acounts#authentication_question',
       as: 'authentication_question_admin_acount'
@@ -21,6 +21,10 @@ Rails.application.routes.draw do
 
   patch 'admin/room/:id/update_name', to: 'admin/rooms#update_name', as: 'update_name_admin_room'
 
+  get 'admin/product/:id/edit/destroy_modal', to: 'admin/products#destroy_modal', as: 'destroy_modal_admin_product'
+
+  patch 'admin/product/:id/edit/set_deleted', to: 'admin/products#set_deleted', as: 'set_deleted_admin_product'
+
   get 'products/:id/index',   to: 'products#index',  as: 'products'
   get 'products/:id/buy',     to: 'products#buy',    as: 'product_buy'
   get 'products/:id/request', to: 'product#request', as: 'product_request'
@@ -32,7 +36,7 @@ Rails.application.routes.draw do
   get  '/logout', to: 'sessions#logout'
   get  '/login',  to: 'sessions#login'
   post '/login',  to: 'sessions#create'
-  
+
   root to: 'sessions#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

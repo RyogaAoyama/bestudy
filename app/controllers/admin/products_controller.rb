@@ -1,11 +1,13 @@
 class Admin::ProductsController < ApplicationController
   def index
-    @products = current_user.product
+    @products = current_user.product.where(is_deleted: false)
   end
 
   def new
-    #TODO: デフォルト画像挿入
     @product = Product.new
+  end
+  def edit
+    @product = Product.find(params[:id])
   end
 
   def create
@@ -14,16 +16,39 @@ class Admin::ProductsController < ApplicationController
     # @product.pointは代入した瞬間にInteger型に自動変換されるため引数にparamsを使用
     @product.point = @product.half_size_change(product_params[:point])
 
-    unless @product.product_img.attached?
+    if @product.valid?
       @product.default_image_set
-    end
-    if @product.save
+      @product.save
       flash[:notice] = "「#{ @product.name }」を登録しました"
       redirect_to admin_products_url
     else
       render :new
     end
+  end
 
+  def update
+    @product = Product.find(params[:id])
+    if @product.update(product_params)
+      flash[:notice] = "「#{ @product.name }」を更新しました"
+      redirect_to admin_products_url
+    else
+      render :edit
+    end
+  end
+
+  def destroy_modal
+    @product = Product.find(params[:id])
+  end
+
+  def set_deleted
+    @product = Product.find(params[:id])
+    if @product.update(is_deleted: true)
+      flash[:alert] = "「#{ @product.name }」を削除しました"
+      redirect_to admin_products_url
+    else
+      flash[:alert] = '削除に失敗しました。再度時間を置いてお試しください。'
+      render :edit
+    end
   end
 
   private

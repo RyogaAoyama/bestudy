@@ -1,0 +1,4 @@
+h1 商品編集
+= render partial: "form", locals: { product: @product }
+= link_to '削除', destroy_modal_admin_product_path(@product.id), remote: true, class: 'btn btn-danger'
+div id="destroy-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"

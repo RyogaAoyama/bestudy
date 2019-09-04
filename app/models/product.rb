@@ -28,8 +28,10 @@ class Product < ApplicationRecord
   end
 
   def default_image_set
-    File.open('public/default.jpg') do |f|
-      self.product_img.attach(io: f, filename: "default.jpg")
+    unless product_img.attached?
+      File.open('public/default.jpg') do |f|
+        self.product_img.attach(io: f, filename: "default.jpg")
+      end
     end
   end
 end

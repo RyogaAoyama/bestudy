@@ -12,4 +12,10 @@ module CommonHelper
     User.find(1).destroy
     SecretQuestion.find(1).destroy
   end
+
+  def create_product
+    FactoryBot.create(:secret_question)
+    FactoryBot.create(:user)
+    FactoryBot.create(:product)
+  end
 end
