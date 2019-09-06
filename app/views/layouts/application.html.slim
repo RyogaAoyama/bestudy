@@ -15,6 +15,7 @@ html
       - if current_user
         = link_to 'ログアウト', logout_path
         = link_to current_user.name, admin_acount_path(current_user), id: 'user_name'
+        = link_to 'リクエスト一覧', admin_product_requests_path
       / TODO:プロフィール画像が登録できない問題
         /= image_tag current_user.image, class: "rounded-circle", width: "33", height: "33" 
 

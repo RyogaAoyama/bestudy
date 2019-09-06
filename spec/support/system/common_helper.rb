@@ -11,6 +11,17 @@ module CommonHelper
     p "ログイン成功"
   end
 
+  def clear
+    SecretQuestion.all.delete_all
+    User.all.delete_all
+    Room.all.delete_all
+  end
+
+  def create_nomal_user
+    FactoryBot.create(:secret_question2)
+    FactoryBot.create(:nomal_user)
+  end
+
   # def product_regist
   #   click_on 'plus'
   #   fill_in  'name',  with: '商品名'

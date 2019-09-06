@@ -3,10 +3,11 @@ Rails.application.routes.draw do
     resources :rooms
     resources :acounts
     resources :products
+    resources :product_requests
   end
-  get 'admin/acount/:id/edit_profile' ,  to: 'admin/acounts#edit_profile' ,  as: 'edit_profile_admin_acount'
+  get 'admin/acount/:id/edit_profile',  to: 'admin/acounts#edit_profile',    as: 'edit_profile_admin_acount'
   get 'admin/acount/:id/authentication', to: 'admin/acounts#authentication', as: 'authentication_admin_acount'
-  get 'admin/acount/:id/destroy_modal' , to: 'admin/acounts#destroy_modal' , as: 'destroy_modal_admin_acount'
+  get 'admin/acount/:id/destroy_modal', to: 'admin/acounts#destroy_modal',   as: 'destroy_modal_admin_acount'
   get 'admin/acount/:id/authentication_question',
       to: 'admin/acounts#authentication_question',
       as: 'authentication_question_admin_acount'
