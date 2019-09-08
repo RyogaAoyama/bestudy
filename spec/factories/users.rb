@@ -9,7 +9,7 @@ FactoryBot.define do
     secret_question_id { 1 }
   end
 
-  factroy :nomal_user, class: User do
+  factory :nomal_user, class: User do
     id { 2 }
     name { "テストユーザー2" }
     login_id { "test_user2" }

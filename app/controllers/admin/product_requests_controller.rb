@@ -1,7 +1,8 @@
 class Admin::ProductRequestsController < ApplicationController
   def index
-    #TODO:グループ取得のメソッド作成する
-    @product_requests = current_user.product.where(is_deleted: false)
+    users = User.where(room_id: owner_room)
+    product_requests = ProductRequest.where(user_id: users.id)
+    @products = Product.where(id: product_requests.product_id)
   end
 
   def new

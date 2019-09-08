@@ -2,14 +2,13 @@ require 'rails_helper'
 
 describe '一覧' do
   before(:all) { login }
-  before { visit admin_product_requests }
+  before { visit admin_product_requests_path_path }
   it '商品リクエストが存在しないメッセージが表示されている' do
     expect(page).to have_content '現在リクエストは届いていません'
   end
   it '商品リクエストの項目が全て表示されている' do
-    create_nomal_user
-    FactoryBot.create(:product_request, user_id: 2, room_id: 1)
-    visit admin_product_requests
+    create_product_request
+    visit admin_product_requests_path_path
     expect(page).to have_content '商品名'
     expect(page).to have_content 'testuser2'
     expect(page).to match(/test.jpg/)
@@ -23,9 +22,8 @@ end
 describe '承諾' do
   before(:all) { login }
   before do
-    create_nomal_user
-    FactoryBot.create(:product_request, user_id: 2, room_id: 1)
-    visit admin_product_requests
+    create_product_request
+    visit admin_product_requests_path
   end
   context 'エラーパターン' do
     it 'エラーメッセージが表示される' do
@@ -70,9 +68,8 @@ end
 describe '拒否' do
   before(:all) { login }
   before do
-    create_nomal_user
-    FactoryBot.create(:product_request, user_id: 2, room_id: 1)
-    visit admin_product_requests
+    create_product_request
+    visit admin_product_requests_path
     click_on '拒否'
   end
   it '商品リクエスト一覧画面から拒否した商品が削除される' do

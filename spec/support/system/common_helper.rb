@@ -12,14 +12,23 @@ module CommonHelper
   end
 
   def clear
-    SecretQuestion.all.delete_all
-    User.all.delete_all
+    ProductRequest.all.delete_all
+    Product.all.delete_all
     Room.all.delete_all
+    User.all.delete_all
+    SecretQuestion.all.delete_all
   end
 
   def create_nomal_user
     FactoryBot.create(:secret_question2)
     FactoryBot.create(:nomal_user)
+  end
+
+  def create_product_request
+    FactoryBot.create(:secret_question2)
+    user = FactoryBot.create(:nomal_user)
+    product = FactoryBot.create(:product, user_id: user.id)
+    FactoryBot.create(:product_request, user_id: user.id, product_id: product.id)
   end
 
   # def product_regist

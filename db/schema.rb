@@ -34,12 +34,11 @@ ActiveRecord::Schema.define(version: 2019_09_05_211545) do
   end
 
   create_table "product_requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
     t.bigint "user_id"
-    t.bigint "room_id"
+    t.bigint "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["room_id"], name: "index_product_requests_on_room_id"
+    t.index ["product_id"], name: "index_product_requests_on_product_id"
     t.index ["user_id"], name: "index_product_requests_on_user_id"
   end
 
@@ -76,17 +75,17 @@ ActiveRecord::Schema.define(version: 2019_09_05_211545) do
     t.boolean "is_admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "rooms_id"
+    t.bigint "room_id"
     t.bigint "secret_question_id"
-    t.index ["rooms_id"], name: "index_users_on_rooms_id"
+    t.index ["room_id"], name: "index_users_on_room_id"
     t.index ["secret_question_id"], name: "index_users_on_secret_question_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "product_requests", "rooms"
+  add_foreign_key "product_requests", "products"
   add_foreign_key "product_requests", "users"
   add_foreign_key "products", "users"
   add_foreign_key "rooms", "users"
-  add_foreign_key "users", "rooms", column: "rooms_id"
+  add_foreign_key "users", "rooms"
   add_foreign_key "users", "secret_questions"
 end

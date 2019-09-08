@@ -3,7 +3,7 @@ module CommonHelper
     FactoryBot.create(:secret_question)
     user = FactoryBot.create(:user)
     room = FactoryBot.create(:room)
-    user.rooms_id = room.id
+    user.room_id = room.id
     return room
   end
 

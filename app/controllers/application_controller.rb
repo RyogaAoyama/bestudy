@@ -16,6 +16,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # 管理人ユーザーが持っているルームを取得
+  def owner_room
+    if session[:id]
+      @owner_room ||= Room.find_by(user_id: current_user.id)
+    end
+  end
+
   # 認証していないユーザーからのアクセスをブロック
   def no_correct_access
     unless current_user
