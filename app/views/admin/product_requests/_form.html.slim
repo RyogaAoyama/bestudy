@@ -1,4 +1,4 @@
-= form_with model: [:admin, product], local: true do |f|
+= form_with model: [:admin, product], url: admin_product_request_path, local: true do |f|
   .form-group
     = f.label :name
     = f.text_field :name, class: 'form-control', id: 'name'
@@ -8,12 +8,12 @@
     = f.text_field :point, class: 'form-control', id: 'point'
     p = get_validate_msg( product, :point )
 
-    = f.label :request_img
-    = f.file_field :request_img, class: 'form-control', id: 'request_img', onchange: 'imagePrev(event)'
-    p = get_validate_msg( product, :request_img )
+    = f.label :product_img
+    = f.file_field :product_img, class: 'form-control', onchange: 'imagePrev(event)', id: 'product_img'
+    p = get_validate_msg( product, :product_img )
 
-    - if product.request_img.attached?
-      = image_tag product.request_img, id: 'prev'
+    - if product.product_img.attached?
+      = image_tag product.product_img, id: 'prev'
     - else
       img#prev
-  = f.submit nil, class: 'btn btn-primary'
+  = f.submit '登録', class: 'btn btn-primary'

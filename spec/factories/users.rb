@@ -17,5 +17,6 @@ FactoryBot.define do
     password { "test_user2" }
     is_admin { false }
     secret_question_id { 1 }
+    room_id { 1 }
   end
 end

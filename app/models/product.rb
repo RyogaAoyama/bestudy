@@ -1,6 +1,8 @@
 class Product < ApplicationRecord
   has_one_attached :product_img
+  belongs_to :room
   belongs_to :user
+  has_one :product_request, dependent: :destroy
   # 商品名
   validates :name, presence: true, length: { maximum: 30 }
 

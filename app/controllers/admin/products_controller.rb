@@ -1,6 +1,6 @@
 class Admin::ProductsController < ApplicationController
   def index
-    @products = current_user.product.where(is_deleted: false)
+    @products = owner_room.product.where(is_deleted: false)
   end
 
   def new
@@ -11,7 +11,7 @@ class Admin::ProductsController < ApplicationController
   end
 
   def create
-    @product = current_user.product.new(product_params)
+    @product = owner_room.product.new(product_params)
 
     # @product.pointは代入した瞬間にInteger型に自動変換されるため引数にparamsを使用
     @product.point = @product.half_size_change(product_params[:point])
