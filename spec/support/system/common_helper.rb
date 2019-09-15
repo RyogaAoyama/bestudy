@@ -30,12 +30,47 @@ module CommonHelper
     product = FactoryBot.create(:product, user_id: user.id)
     FactoryBot.create(:product_request, user_id: user.id, product_id: product.id)
   end
+###########上のヘルパーメソッドは色々混ざりすぎて使いづらいので使わないこと##################
+###########既存のテストコードがあるので削除できない、完全にミスった...######################
 
-  # def product_regist
-  #   click_on 'plus'
-  #   fill_in  'name',  with: '商品名'
-  #   fill_in  'point', with: 300
-  #   attach_file 'product_img', 'public/test.jpg'
-  #   click_on '登録'
-  # end
+  def new_login(login_id, password)
+    visit login_path
+    fill_in 'login_id', with: login_id
+    fill_in 'password', with: password
+    click_on 'ログイン'
+    p "ログイン成功"
+  end
+
+  def get_owner_user(room)
+    owner_user = User.find(room.user_id)
+  end
+
+  def create_delivery
+    user = FactoryBot.create(:new_nomal_user)
+    room = FactoryBot.create(:new_room)
+    room_owner = get_owner_user(room)
+
+    product = FactoryBot.create(
+      :new_product,
+      room_id: room.id,
+      user_id: room_owner.id
+    )
+    order_history = FactoryBot.create(
+      :order_history,
+      room_id: room.id,
+      user_id: user.id,
+      product_id: product.id
+    )
+    FactoryBot.create(
+      :delivery,
+      user_id: user.id,
+      room_id: room.id,
+      product_id: product.id,
+      order_history_id: order_history.id
+    )
+  end
+
+  def create_order_history
+    #TODO: 必要になったら作る
+  end
 end

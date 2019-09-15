@@ -1,0 +1,14 @@
+h2 注文詳細
+
+div
+  div = l(@delivery.created_at, format: :times)
+  h3 
+    strong 購入者
+  strong = @delivery.user.name
+
+div
+  h3
+    strong 購入された商品
+  strong = @delivery.product.name
+
+= link_to '受け渡し完了', admin_delivery_path(@delivery), method: :delete, class: "btn btn-primary"

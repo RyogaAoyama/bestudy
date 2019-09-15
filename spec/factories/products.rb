@@ -12,4 +12,18 @@ FactoryBot.define do
       end
     end
   end
+
+  factory :new_product, class: Product do
+    trait :association do
+      association :room, factory: :new_room
+    end
+    name { "商品名2" }
+    point { 200 }
+    is_deleted { false }
+    after(:create) do |product|
+      File.open('public/test.jpg') do |f|
+        product.product_img.attach(io: f, filename: "test.jpg")
+      end
+    end
+  end
 end

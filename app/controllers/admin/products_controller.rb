@@ -6,6 +6,7 @@ class Admin::ProductsController < ApplicationController
   def new
     @product = Product.new
   end
+
   def edit
     @product = Product.find(params[:id])
   end
@@ -15,6 +16,7 @@ class Admin::ProductsController < ApplicationController
 
     # @product.pointは代入した瞬間にInteger型に自動変換されるため引数にparamsを使用
     @product.point = @product.half_size_change(product_params[:point])
+    @product.user_id = current_user.id
 
     if @product.valid?
       @product.default_image_set

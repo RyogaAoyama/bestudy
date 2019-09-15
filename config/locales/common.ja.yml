@@ -7,3 +7,4 @@ ja:
   time:
     formats:
       default: '%Y/%m/%d'
+      times: '%Y/%m/%d %H:%M'
