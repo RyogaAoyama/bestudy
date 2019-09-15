@@ -7,3 +7,7 @@ h1 商品一覧
         h5 class="card-title" = product.name
         p class="card-title" = product.point
         = link_to '編集', edit_admin_product_path(product.id), class: "btn btn-primary"
+
+- if @products.blank?
+  |商品を登録してみよう！
+  = link_to '商品登録', new_admin_product_path(current_user), class: 'btn btn-primary', id: 'plus'
