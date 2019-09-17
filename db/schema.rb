@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_14_073638) do
+ActiveRecord::Schema.define(version: 2019_09_15_060834) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -94,6 +94,15 @@ ActiveRecord::Schema.define(version: 2019_09_14_073638) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "subjects", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", null: false
+    t.boolean "is_deleted", default: false
+    t.bigint "room_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_subjects_on_room_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "login_id", null: false
@@ -119,6 +128,7 @@ ActiveRecord::Schema.define(version: 2019_09_14_073638) do
   add_foreign_key "products", "rooms"
   add_foreign_key "products", "users"
   add_foreign_key "rooms", "users"
+  add_foreign_key "subjects", "rooms"
   add_foreign_key "users", "rooms"
   add_foreign_key "users", "secret_questions"
 end
