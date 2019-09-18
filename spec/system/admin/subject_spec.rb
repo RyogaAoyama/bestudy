@@ -12,17 +12,15 @@ describe '科目' do
   
   describe '一覧' do
     it '一覧が表示されている' do
-      # TODO: id決まったら決まったら修正
-      expect(page).to have_selector 'ID'
+      expect(page).to have_selector "#subject-#{ subject.id }"
     end
 
     context '科目データが存在しない場合' do
       it 'メッセージが表示されている' do
-        expect(page).to have_content '科目は登録されていません'
+        expect(page).to have_content '現在、登録されている科目はありません。'
       end
       it '科目登録ボタンが表示されている' do
-        # ボタンのID決まったら修正
-        expect(page).to have_selector 'btn-id'
+        expect(page).to have_selector '#new_btn'
       end
     end
   end

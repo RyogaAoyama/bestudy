@@ -20,4 +20,6 @@ ja:
         name: 商品名
         point: ポイント
         product_img: 商品イメージ
+      subject:
+        name: 科目名
         

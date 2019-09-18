@@ -1,0 +1,6 @@
+= form_with model: [:admin, subject], local: true do |f|
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: 'form-control', id: 'name'
+    p = get_validate_msg( subject, :name )
+  = f.submit nil, class: 'btn btn-primary'
