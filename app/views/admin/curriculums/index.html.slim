@@ -1,0 +1,12 @@
+h1 科目一覧
+div class="list-group"
+  - @curriculums.each do |curriculum|
+    = link_to edit_admin_curriculum_path(curriculum), class: "list-group-item list-group-item-action", id: "curriculum-#{curriculum.id}" do
+      div = curriculum.name
+      = link_to '削除', destroy_modal_admin_curriculum_path(curriculum), remote: true, class: 'btn btn-danger text-right'
+- if @curriculums.blank?
+  |現在、登録されている科目はありません。
+  |科目を登録してみましょう！
+  = link_to "科目登録", new_admin_curriculum_path, class: 'btn btn-primary', id: 'new_btn'
+
+div id="destroy-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"

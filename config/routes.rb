@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resources :products
     resources :product_requests
     resources :deliveries
-    resources :subjects
+    resources :curriculums
   end
   get 'admin/acount/:id/edit_profile',  to: 'admin/acounts#edit_profile',    as: 'edit_profile_admin_acount'
   get 'admin/acount/:id/authentication', to: 'admin/acounts#authentication', as: 'authentication_admin_acount'
@@ -30,9 +30,9 @@ Rails.application.routes.draw do
 
   patch 'admin/product/:id/edit/set_deleted', to: 'admin/products#set_deleted', as: 'set_deleted_admin_product'
 
-  get 'admin/subject/:id/edit/destroy_modal', to: 'admin/subjects#destroy_modal', as: 'destroy_modal_admin_subject'
+  get 'admin/curriculum/:id/edit/destroy_modal', to: 'admin/curriculums#destroy_modal', as: 'destroy_modal_admin_curriculum'
 
-  patch 'admin/subject/:id/edit/set_deleted', to: 'admin/subjects#set_deleted', as: 'set_deleted_admin_subject'
+  patch 'admin/curriculum/:id/edit/set_deleted', to: 'admin/curriculums#set_deleted', as: 'set_deleted_admin_curriculum'
 
   get 'products/:id/index',   to: 'products#index',  as: 'products'
   get 'products/:id/buy',     to: 'products#buy',    as: 'product_buy'

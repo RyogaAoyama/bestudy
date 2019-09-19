@@ -2,7 +2,7 @@ class Room < ApplicationRecord
   belongs_to  :user, optional: true
   has_many    :product, dependent: :destroy
   has_many    :delivery, dependent: :destroy
-  has_many    :subject, dependent: :destroy
+  has_many    :curriculum, dependent: :destroy
   # グループ名
   validates :name, presence: true, length: { maximum: 30 }
   validates :name, allow_blank: true,
