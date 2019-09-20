@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Curriculum, type: :model do
   let(:curriculum) { Curriculum.new(room_id: 1, name: '名前') }
   let(:error_msg) { curriculum.errors.messages[:name] }
-  
+
   context 'エラーパターン' do
     it '【空白】エラーが出る' do
       curriculum.name = '  '

@@ -18,9 +18,9 @@ describe '科目' do
         expect(page).to have_selector '#new_btn'
       end
     end
-    
+
     context '科目データが存在する場合' do
-      before do 
+      before do
         curriculum
         click_on '科目一覧'
       end
@@ -29,9 +29,9 @@ describe '科目' do
       end
     end
   end
-  
+
   describe '登録' do
-    before do 
+    before do
       click_on '科目登録'
     end
 
@@ -40,6 +40,7 @@ describe '科目' do
         fill_in 'name', with: '科目名'
         click_on '登録'
       end
+
       it '登録できる' do
         expect(Curriculum.all).to be_present
       end
@@ -50,6 +51,7 @@ describe '科目' do
         expect(current_path).to eq admin_curriculums_path
       end
     end
+
     context 'エラーパターン' do
       it 'エラーが表示される' do
         fill_in 'name', with: '  '
@@ -87,7 +89,7 @@ describe '科目' do
       visit admin_curriculums_path
       click_on '削除'
     end
-      
+
     it '削除確認モーダルが表示される' do
       expect(page).to have_selector '#destroy-modal'
     end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_18_121421) do
+ActiveRecord::Schema.define(version: 2019_09_19_114816) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -67,6 +67,17 @@ ActiveRecord::Schema.define(version: 2019_09_18_121421) do
     t.index ["user_id"], name: "index_order_histories_on_user_id"
   end
 
+  create_table "points", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.integer "point"
+    t.integer "total"
+    t.bigint "room_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_points_on_room_id"
+    t.index ["user_id"], name: "index_points_on_user_id"
+  end
+
   create_table "product_requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "product_id"
@@ -86,6 +97,18 @@ ActiveRecord::Schema.define(version: 2019_09_18_121421) do
     t.bigint "room_id"
     t.index ["room_id"], name: "index_products_on_room_id"
     t.index ["user_id"], name: "index_products_on_user_id"
+  end
+
+  create_table "results", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "curriculum_id"
+    t.bigint "user_id"
+    t.bigint "room_id"
+    t.integer "result"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["curriculum_id"], name: "index_results_on_curriculum_id"
+    t.index ["room_id"], name: "index_results_on_room_id"
+    t.index ["user_id"], name: "index_results_on_user_id"
   end
 
   create_table "rooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

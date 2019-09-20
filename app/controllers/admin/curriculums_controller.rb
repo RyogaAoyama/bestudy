@@ -1,3 +1,4 @@
+# 科目機能のコントローラー
 class Admin::CurriculumsController < ApplicationController
   def index
     @curriculums = owner_room.curriculum.where(is_deleted: false)
@@ -24,7 +25,7 @@ class Admin::CurriculumsController < ApplicationController
   def update
     @curriculum = Curriculum.find(params[:id])
     if @curriculum.update(curriculum_params)
-      flash[:notice] = "科目を更新しました"
+      flash[:notice] = '科目を更新しました'
       redirect_to admin_curriculums_url
     else
       render :edit
@@ -43,8 +44,8 @@ class Admin::CurriculumsController < ApplicationController
   end
 
   private
-  
+
   def curriculum_params
-  params.require(:curriculum).permit(:name)
+    params.require(:curriculum).permit(:name)
   end
 end

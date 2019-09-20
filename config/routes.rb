@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :product_requests
     resources :deliveries
     resources :curriculums
+    resources :results
   end
   get 'admin/acount/:id/edit_profile',  to: 'admin/acounts#edit_profile',    as: 'edit_profile_admin_acount'
   get 'admin/acount/:id/authentication', to: 'admin/acounts#authentication', as: 'authentication_admin_acount'
