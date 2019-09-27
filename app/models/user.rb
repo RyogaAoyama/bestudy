@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many         :order_history, dependent: :destroy
   has_many         :result, dependent: :destroy
   has_many         :point, dependent: :destroy
+  has_one       :point, dependent: :destroy
   # 名前
   validates :name, presence: true, length: { maximum: 30 }
   validates :name, allow_blank: true, format: { with: /\A[^,'".\\\/=\?!:;]+\z/,

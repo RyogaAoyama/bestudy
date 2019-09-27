@@ -1,2 +1,37 @@
-h1 Admin::Results#new
-p Find me in app/views/admin/results/new.html.slim
+h1 成績入力
+- if @curriculums.blank?
+  div 科目を登録してみよう!
+  = link_to '科目を登録', new_admin_curriculum_path, class: 'btn btn-primary', id: 'curriculums-btn'
+- else
+  = form_with model: @results, url: admin_acount_results_path, id: 'result-form' do |f|
+    .form-group
+      - @results.collection.zip(@curriculums) do |result, curriculum|
+        h3 = curriculum.name
+        = fields_for "results[#{curriculum.id}]", result, include_id: false do |field|
+          = field.label 'A', class: 'radio-inline'
+          = field.radio_button :result, 1, class: 'radio', id: "a-#{ curriculum.id }", onchange: 'pointCalc()'
+
+          = field.label 'B', class: 'radio-inline'
+          = field.radio_button :result, 2, class: 'radio', id: "b-#{ curriculum.id }", onchange: 'pointCalc()'
+
+          = field.label 'C', class: 'radio-inline'
+          = field.radio_button :result, 3, class: 'radio', id: "c-#{ curriculum.id }", onchange: 'pointCalc()'
+
+          = field.label 'D', class: 'radio-inline'
+          = field.radio_button :result, 4, class: 'radio', id: "d-#{ curriculum.id }", onchange: 'pointCalc()'
+
+          = field.label 'E', class: 'radio-inline'
+          = field.radio_button :result, 5, class: 'radio', id: "e-#{ curriculum.id }", onchange: 'pointCalc()'
+
+          = field.label 'なし', class: 'radio-inline'
+          = field.radio_button :result, 0, class: 'radio', id: "none-#{ curriculum.id }", onchange: 'pointCalc()'
+
+          = field.hidden_field :curriculum_id, value: curriculum.id
+  div class='border-secondary' id='point-wrap'
+    div class='text-center'
+      span 付与ポイント:
+      span id='point' 0
+      span pt
+  = link_to '登録', create_modal_admin_result_path, remote: true, class: 'btn btn-primary', id: 'result-btn'
+
+div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"

@@ -4,7 +4,7 @@ class Room < ApplicationRecord
   has_many    :delivery, dependent: :destroy
   has_many    :curriculum, dependent: :destroy
   has_many    :result, dependent: :destroy
-  has_many         :point, dependent: :destroy
+  has_many    :point, dependent: :destroy
   # グループ名
   validates :name, presence: true, length: { maximum: 30 }
   validates :name, allow_blank: true,

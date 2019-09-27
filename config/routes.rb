@@ -3,12 +3,13 @@ Rails.application.routes.draw do
   get 'index/edit'
   namespace :admin do
     resources :rooms
-    resources :acounts
+    resources :acounts do
+      resources :results, except: :index
+    end
     resources :products
     resources :product_requests
     resources :deliveries
     resources :curriculums
-    resources :results
   end
   get 'admin/acount/:id/edit_profile',  to: 'admin/acounts#edit_profile',    as: 'edit_profile_admin_acount'
   get 'admin/acount/:id/authentication', to: 'admin/acounts#authentication', as: 'authentication_admin_acount'
@@ -35,10 +36,14 @@ Rails.application.routes.draw do
 
   patch 'admin/curriculum/:id/edit/set_deleted', to: 'admin/curriculums#set_deleted', as: 'set_deleted_admin_curriculum'
 
+  get 'admin/result/index', to: 'admin/results#index', as: 'admin_results'
+  get 'admin/result/new/create_modal', to: 'admin/results#create_modal', as: 'create_modal_admin_result'
+
   get 'products/:id/index',   to: 'products#index',  as: 'products'
   get 'products/:id/buy',     to: 'products#buy',    as: 'product_buy'
   get 'products/:id/request', to: 'product#request', as: 'product_request'
   get 'products/:id/history', to: 'product#history', as: 'product_history'
+
 
   resources :acounts
   get 'acounts/new/nomal_new', to: 'acounts#nomal_new', as: 'nomal_new'

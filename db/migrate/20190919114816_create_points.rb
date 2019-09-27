@@ -4,7 +4,6 @@ class CreatePoints < ActiveRecord::Migration[5.2]
       t.references :user
       t.integer :point
       t.integer :total
-      t.references :room
 
       t.timestamps
     end
