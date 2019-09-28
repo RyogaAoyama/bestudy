@@ -14,7 +14,7 @@ describe 'テスト入力機能' do
   describe 'ユーザー選択' do
     context 'ユーザーが存在しない場合' do
       it 'ユーザーが存在しない旨のメッセージが表示される' do
-        visit admin_test_results_path
+        visit admin_acount_test_results_path
         expect(page).to have_content '現在ルームに所属しているユーザーはいません'
       end
     end
@@ -22,7 +22,7 @@ describe 'テスト入力機能' do
     context 'ユーザーが存在する場合' do
       it 'ユーザー一覧の項目が全て表示されている' do
         nomal_user
-        visit admin_test_results_path
+        visit admin_acount_test_results_path
         expect(page).to have_content nomal_user.name
         # TODO:これはユーザー写真登録ができてから
         # expect(find("#img-#{ nomal_user.id }")[:src]).to match 'public/test.jpg'
@@ -36,7 +36,7 @@ describe 'テスト入力機能' do
         curriculums
         nomal_user
         point
-        visit admin_test_results_path
+        visit admin_acount_test_results_path
         click_on "user-#{ nomal_user.id }"
         curriculums.each do |curriculum|
           expect(page).to have_content curriculum
@@ -50,7 +50,7 @@ describe 'テスト入力機能' do
       curriculums
       nomal_user
       point
-      visit admin_test_results_path
+      visit admin_acount_test_results_path
       click_on "user-#{ nomal_user.id }"
       select '科目２', from: '科目'
       fill_in 'test', with: 100
@@ -65,7 +65,7 @@ describe 'テスト入力機能' do
       curriculums
       nomal_user
       point
-      visit admin_test_results_path
+      visit admin_acount_test_results_path
       click_on "user-#{ nomal_user.id }"
       select '科目２', from: '科目'
       in_test
@@ -86,7 +86,7 @@ describe 'テスト入力機能' do
         it '正しくポイントが加算される' do
           expect(TestResult.find_by(user_id: nomal_user.id).score).to eq 100
           expect(Point.find_by(user_id: nomal_user.id).point).to eq 100
-          expect(current_path).to eq admin_test_results_path
+          expect(current_path).to eq admin_acount_test_results_path
           expect(page).to have_content 'テストの登録が完了しました'
         end
       end

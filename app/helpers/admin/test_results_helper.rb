@@ -1,0 +1,2 @@
+module Admin::TestResultsHelper
+end

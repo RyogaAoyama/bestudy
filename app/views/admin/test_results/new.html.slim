@@ -1,0 +1,13 @@
+h1 アカウント作成
+
+= form_with model: @test_result, url: admin_acount_test_results_path, local: true do |f|
+  .form-row
+    .form-group
+      = f.label :secret_question_id
+      = f.collection_select :curriculums, @curriculums, :id, :name, {}, { class: 'form-control', id: "curriculums" }
+
+      = f.label :name
+      = f.text_field :name, id: 'name', class: 'form-control', placeholder: '点数は1~100点まで入力できます'
+      p = get_validate_msg( @test_result, :name )
+
+    = f.submit '次へ', class: 'btn btn-primary'

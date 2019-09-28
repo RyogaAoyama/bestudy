@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe TestResultsController, type: :controller do
+RSpec.describe Admin::TestResultsController, type: :controller do
 
   describe "GET #index" do
     it "returns http success" do
