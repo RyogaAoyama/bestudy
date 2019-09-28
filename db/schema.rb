@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_19_114816) do
+ActiveRecord::Schema.define(version: 2019_09_27_235058) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -124,6 +124,18 @@ ActiveRecord::Schema.define(version: 2019_09_19_114816) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "test_results", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "room_id"
+    t.bigint "curriculum_id"
+    t.integer "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["curriculum_id"], name: "index_test_results_on_curriculum_id"
+    t.index ["room_id"], name: "index_test_results_on_room_id"
+    t.index ["user_id"], name: "index_test_results_on_user_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "login_id", null: false
@@ -150,6 +162,9 @@ ActiveRecord::Schema.define(version: 2019_09_19_114816) do
   add_foreign_key "products", "rooms"
   add_foreign_key "products", "users"
   add_foreign_key "rooms", "users"
+  add_foreign_key "test_results", "curriculums"
+  add_foreign_key "test_results", "rooms"
+  add_foreign_key "test_results", "users"
   add_foreign_key "users", "rooms"
   add_foreign_key "users", "secret_questions"
 end
