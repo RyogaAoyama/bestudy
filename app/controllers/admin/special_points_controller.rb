@@ -1,0 +1,7 @@
+class Admin::SpecialPointsController < ApplicationController
+  def index
+  end
+
+  def new
+  end
+end

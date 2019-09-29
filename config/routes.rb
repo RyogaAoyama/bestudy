@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   namespace :admin do
+    get 'special_points/index'
+    get 'special_points/new'
+  end
+  namespace :admin do
     get 'test_results/index'
     get 'test_results/new'
   end
