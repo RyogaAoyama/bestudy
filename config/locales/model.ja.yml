@@ -22,4 +22,6 @@ ja:
         product_img: 商品イメージ
       curriculum:
         name: 科目名
+      test_result:
+        score: 点数
         

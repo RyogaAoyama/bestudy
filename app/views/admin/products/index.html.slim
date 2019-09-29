@@ -1,13 +1,13 @@
 h1 商品一覧
-= link_to '商品登録', new_admin_product_path(current_user), class: 'btn btn-primary', id: 'plus'
-- @products.each do |product|
-    div class="card" style="width: 18rem;" id="product-#{ product.id }"
-      = image_tag product.product_img, class: "card-img-top product_img", alt: "カードの画像"
-      div class="card-body"
-        h5 class="card-title" = product.name
-        p class="card-title" = product.point
-        = link_to '編集', edit_admin_product_path(product.id), class: "btn btn-primary"
-
 - if @products.blank?
   |商品を登録してみよう！
   = link_to '商品登録', new_admin_product_path(current_user), class: 'btn btn-primary', id: 'plus'
+- else
+  = link_to '商品登録', new_admin_product_path(current_user), class: 'btn btn-primary', id: 'plus'
+  - @products.each do |product|
+      div class="card" style="width: 18rem;" id="product-#{ product.id }"
+        = image_tag product.product_img, class: "card-img-top product_img", alt: "カードの画像"
+        div class="card-body"
+          h5 class="card-title" = product.name
+          p class="card-title" = product.point
+          = link_to '編集', edit_admin_product_path(product.id), class: "btn btn-primary"

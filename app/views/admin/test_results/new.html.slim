@@ -1,13 +1,14 @@
-h1 アカウント作成
+h1 テスト入力
 
-= form_with model: @test_result, url: admin_acount_test_results_path, local: true do |f|
+= form_with model: @test_result, url: admin_acount_test_results_path, id: 'test-result-form', local: true do |f|
   .form-row
     .form-group
-      = f.label :secret_question_id
-      = f.collection_select :curriculums, @curriculums, :id, :name, {}, { class: 'form-control', id: "curriculums" }
+      = f.label '科目'
+      = f.collection_select :curriculum_id, @curriculums, :id, :name, {}, { class: 'form-control', id: "curriculums" }
 
-      = f.label :name
-      = f.text_field :name, id: 'name', class: 'form-control', placeholder: '点数は1~100点まで入力できます'
-      p = get_validate_msg( @test_result, :name )
+      = f.label :score
+      = f.text_field :score, id: 'score', class: 'form-control', placeholder: '点数は1~100点まで入力できます'
+      p = get_validate_msg( @test_result, :score )
 
-    = f.submit '次へ', class: 'btn btn-primary'
+= link_to '登録', create_modal_admin_test_result_path, remote: true, class: 'btn btn-primary', id: 'test-result-btn'
+div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"

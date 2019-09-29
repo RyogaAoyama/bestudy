@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :rooms
     resources :acounts do
       resources :results, except: :index
+      resources :test_results, except: :index
     end
     resources :products
     resources :product_requests
@@ -44,6 +45,11 @@ Rails.application.routes.draw do
 
   get 'admin/result/index', to: 'admin/results#index', as: 'admin_results'
   get 'admin/result/new/create_modal', to: 'admin/results#create_modal', as: 'create_modal_admin_result'
+
+  get 'admin/test_result/new/create_modal', to: 'admin/test_results#create_modal', as: 'create_modal_admin_test_result'
+  get 'admin/test_result/new/index', to: 'admin/test_results#index', as: 'admin_test_results'
+
+  
 
   get 'products/:id/index',   to: 'products#index',  as: 'products'
   get 'products/:id/buy',     to: 'products#buy',    as: 'product_buy'

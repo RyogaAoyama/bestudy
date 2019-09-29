@@ -17,8 +17,7 @@ class Admin::ResultsController < ApplicationController
 
       # ポイントの計算と保存
       point = Point.find_by(user_id: params[:acount_id])
-      point_calc = PointCalc.new
-      point.point += point_calc.result_calc(@results.collection)
+      point.point += point.result_calc(@results.collection)
       point.save
 
       # TODO: お知らせ

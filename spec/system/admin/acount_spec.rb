@@ -3,6 +3,7 @@ require 'rails_helper'
 
 describe '管理者のアカウントを作成' do
   before do
+    FactoryBot.create(:new_secret_question)
     visit new_admin_acount_path
     fill_in  'name',                  with: 'MH'
     fill_in  'login_id',              with: 'test_user1'
@@ -20,6 +21,7 @@ end
 describe '入力フォームのエラーメッセージが表示される' do
   describe 'ユーザー入力フォーム' do
     before do
+      FactoryBot.create(:new_secret_question)
       visit new_admin_acount_path
       fill_in  'name',                  with: ''
       fill_in  'login_id',              with: ''
@@ -37,6 +39,7 @@ describe '入力フォームのエラーメッセージが表示される' do
 
   describe 'ルーム入力フォーム' do
     before do
+      FactoryBot.create(:new_secret_question)      
       visit new_admin_acount_path
       fill_in  'name',                  with: 'MH'
       fill_in  'login_id',              with: 'test_user1'

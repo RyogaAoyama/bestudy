@@ -1,4 +1,4 @@
-class PointCalc
+module PointCalc
   def result_calc(results)
     point = 0
     results.each do |result|
@@ -18,5 +18,9 @@ class PointCalc
       end
     end
     point
+  end
+
+  def test_result_calc(result, point)
+    point += result
   end
 end

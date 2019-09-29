@@ -22,5 +22,5 @@ Layout/SpaceInsideStringInterpolation:
   EnforcedStyle: space
 
   # コンパクト形式でクラスを宣言
-Style/ClassAndModuleChildren EnforcedStyle:
+ClassAndModuleChildren:
   EnforcedStyle: compact

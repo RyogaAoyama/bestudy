@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe '成績' do
-  let(:point) { FactoryBot.create(:point, user_id: nomal_user.id, room_id: room.id) }
+  let(:point) { FactoryBot.create(:point, user_id: nomal_user.id) }
   let(:nomal_user) { FactoryBot.create(:new_nomal_user, room_id: room.id) }
   let(:room) { FactoryBot.create(:new_room) }
   let(:curriculums) { 6.times.map { FactoryBot.create(:curriculum_sequence, room_id: room.id) } }
