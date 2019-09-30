@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :acounts do
       resources :results, except: :index
       resources :test_results, except: :index
+      resources :special_points, except: :index
     end
     resources :products
     resources :product_requests
@@ -52,6 +53,9 @@ Rails.application.routes.draw do
 
   get 'admin/test_result/new/create_modal', to: 'admin/test_results#create_modal', as: 'create_modal_admin_test_result'
   get 'admin/test_result/new/index', to: 'admin/test_results#index', as: 'admin_test_results'
+
+  get 'admin/special_points/new/create_modal', to: 'admin/special_points#create_modal', as: 'create_modal_admin_special_point'
+  get 'admin/special_points/new/index', to: 'admin/special_points#index', as: 'admin_special_points'
 
   
 

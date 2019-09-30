@@ -20,7 +20,7 @@ class Admin::TestResultsController < ApplicationController
     @test_result.score = @test_result.half_size_change(test_result_params[:score])
     if @test_result.save
       point = Point.find_by(user_id: params[:acount_id])
-      point.point = point.test_result_calc(@test_result.score, point.point)
+      point.point = point.add_point(@test_result.score, point.point)
       point.save
       flash[:notice] = 'テストの登録が完了しました'
       redirect_to admin_test_results_path

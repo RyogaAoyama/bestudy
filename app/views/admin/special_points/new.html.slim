@@ -1,2 +1,16 @@
-h1 Admin::SpecialPoints#new
-p Find me in app/views/admin/special_points/new.html.slim
+h1 特別ポイント入力
+
+= form_with model: @special_point, url: admin_acount_special_points_path, id: 'special-point-form', local: true do |f|
+  .form-row
+    .form-group
+      = f.label :point
+      = f.text_field :point, id: 'point', class: 'form-control', placeholder: '1~9999ポイントまで付与できます'
+      p = get_validate_msg( @special_point, :point )
+
+      = f.label :message
+      = f.text_area :message, id: 'message', class: 'form-control', placeholder: 'いつも頑張っている人にメッセージを送ってみましょう'
+      p = get_validate_msg( @special_point, :message )
+
+= link_to '登録', create_modal_admin_special_point_path, remote: true, class: 'btn btn-primary', id: 'test-result-btn'
+
+div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"

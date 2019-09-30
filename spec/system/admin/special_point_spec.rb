@@ -8,20 +8,20 @@ describe '特別ポイント機能' do
   before do
     room
     new_login('admin_user1', 'admin_user1')
+    nomal_user
+    visit admin_special_points_path
   end
 
   describe 'ユーザー一覧' do
     context 'ユーザーが存在しない場合' do
+      let(:nomal_user) { '' }
       it 'ユーザーが存在しない旨を表示する' do
-        visit admin_special_point_path
         expect(page).to have_content '現在ルームに所属しているユーザーはいません'
       end
     end
 
     context 'ユーザーが存在する場合' do
       it 'ユーザー一覧の項目が全て表示されている' do
-        nomal_user
-        visit admin_special_point_path
         expect(page).to have_content nomal_user.name
         # TODO:これはユーザー写真登録ができてから
         # expect(find("#img-#{ nomal_user.id }")[:src]).to match 'public/test.jpg'
@@ -31,9 +31,7 @@ describe '特別ポイント機能' do
 
   describe '登録確認' do
     it '確認モーダルが表示される' do
-      nomal_user
       point
-      visit admin_special_point_path
       click_on "user-#{ nomal_user.id }"
       fill_in 'point', with: 100
       fill_in 'message', with: 'いつも頑張っていますね!えくせれんと'
@@ -47,9 +45,7 @@ describe '特別ポイント機能' do
     let(:in_message) { fill_in 'message', with: 'a' * 300 }
 
     before do
-      nomal_user
       point
-      visit admin_special_point_path
       click_on "user-#{ nomal_user.id }"
       in_point
       in_message
@@ -70,7 +66,7 @@ describe '特別ポイント機能' do
       it '正しくポイントが加算されている' do
         expect(SpecialPoint.find_by(user_id: nomal_user.id).point).to eq 100
         expect(Point.find_by(user_id: nomal_user.id).point).to eq 100
-        expect(current_path).to eq admin_special_point_path
+        expect(current_path).to eq admin_special_points_path
         expect(page).to have_content "#{ nomal_user.name }に特別ポイントを送りました"
       end
       # TODO: お知らせ機能実装時に

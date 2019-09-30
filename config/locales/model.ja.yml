@@ -24,4 +24,7 @@ ja:
         name: 科目名
       test_result:
         score: 点数
+      special_point:
+        point: 特別ポイント
+        message: メッセージ
         

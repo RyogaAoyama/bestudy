@@ -20,7 +20,7 @@ module PointCalc
     point
   end
 
-  def test_result_calc(result, point)
+  def add_point(result, point)
     point += result
   end
 end
