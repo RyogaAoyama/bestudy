@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       resources :test_results, except: :index
       resources :special_points, except: :index
     end
+    resources :room_requests
     resources :products
     resources :product_requests
     resources :deliveries
@@ -57,7 +58,7 @@ Rails.application.routes.draw do
   get 'admin/special_points/new/create_modal', to: 'admin/special_points#create_modal', as: 'create_modal_admin_special_point'
   get 'admin/special_points/new/index', to: 'admin/special_points#index', as: 'admin_special_points'
 
-  
+  post 'admin/room_request/:id/create', to: 'admin/room_requests#create', as: 'admin_room_request_create'
 
   get 'products/:id/index',   to: 'products#index',  as: 'products'
   get 'products/:id/buy',     to: 'products#buy',    as: 'product_buy'

@@ -1,0 +1,13 @@
+h1 承認
+
+div
+  h3
+    strong= @user.name
+
+div
+  h2
+    strong このユーザーを承認しますか？
+
+div
+ = link_to '承認', admin_room_request_create_path(@user), class: 'btn btn-primary', method: :post
+ = link_to '拒否', admin_room_request_path(@user), clsss: 'btn btn-danger', method: :delete

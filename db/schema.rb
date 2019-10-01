@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_30_110900) do
+ActiveRecord::Schema.define(version: 2019_09_30_113545) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -109,6 +109,15 @@ ActiveRecord::Schema.define(version: 2019_09_30_110900) do
     t.index ["user_id"], name: "index_results_on_user_id"
   end
 
+  create_table "room_requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "room_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_room_requests_on_room_id"
+    t.index ["user_id"], name: "index_room_requests_on_user_id"
+  end
+
   create_table "rooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "regist_id"
     t.string "name"
@@ -172,6 +181,8 @@ ActiveRecord::Schema.define(version: 2019_09_30_110900) do
   add_foreign_key "product_requests", "users"
   add_foreign_key "products", "rooms"
   add_foreign_key "products", "users"
+  add_foreign_key "room_requests", "rooms"
+  add_foreign_key "room_requests", "users"
   add_foreign_key "rooms", "users"
   add_foreign_key "special_points", "rooms"
   add_foreign_key "special_points", "users"

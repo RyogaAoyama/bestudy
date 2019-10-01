@@ -1,0 +1,9 @@
+h1 ユーザー選択
+div class="list-group"
+  - @room_requests.each do |requets|
+    - user_id = requets.user_id
+    = link_to admin_room_request_path(user_id), class: "list-group-item list-group-item-action", id: "user-#{ user_id }" do
+      small = l(requets.created_at, format: :times)
+      div = User.find(user_id).name
+- if @users.blank?
+  |現在リクエストは存在しません
