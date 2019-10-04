@@ -11,7 +11,7 @@ FactoryBot.define do
     question { "好きな食べ物" }
   end
   factory :new_secret_question2, class: SecretQuestion do
-    question { "好きな場所" }
+    sequence(:question) { |i| "好きな場所#{ i }" }
   end
   # factory :three_question, class: SecretQuestion do
   #   id { 3 }

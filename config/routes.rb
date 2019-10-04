@@ -1,12 +1,4 @@
 Rails.application.routes.draw do
-  namespace :admin do
-    get 'special_points/index'
-    get 'special_points/new'
-  end
-  namespace :admin do
-    get 'test_results/index'
-    get 'test_results/new'
-  end
   get 'test_results/index'
   get 'test_results/new'
   get 'index/new'
@@ -23,6 +15,8 @@ Rails.application.routes.draw do
     resources :product_requests
     resources :deliveries
     resources :curriculums
+    
+    get 'room_users/index', as: 'room_users'
   end
   get 'admin/acount/:id/edit_profile',  to: 'admin/acounts#edit_profile',    as: 'edit_profile_admin_acount'
   get 'admin/acount/:id/authentication', to: 'admin/acounts#authentication', as: 'authentication_admin_acount'

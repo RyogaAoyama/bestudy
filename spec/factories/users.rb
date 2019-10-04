@@ -23,10 +23,10 @@ FactoryBot.define do
   factory :new_nomal_user, class: User do
     association :secret_question, factory: :new_secret_question
     id { 4 }
-    name { "テストユーザー3" }
-    login_id { "test_user3" }
+    sequence(:name, 3) { |i| "テストユーザー#{ i }"}
+    sequence(:login_id, 3) { |i| "test_user#{ i }"}
+    sequence(:password, 3) { |i| "test_user#{ i }"}
     answer { "大元小学校" }
-    password { "test_user3" }
     is_admin { false }
   end
 
@@ -34,8 +34,8 @@ FactoryBot.define do
     association :secret_question, factory: :new_secret_question2
     name { "管理ユーザー１" }
     login_id { "admin_user1" }
-    answer { "大元小学校" }
     password { "admin_user1" }
+    answer { "大元小学校" }
     is_admin { true }
   end
 end
