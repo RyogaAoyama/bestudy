@@ -1,2 +1,9 @@
-h1 Admin::RoomUsers#index
-p Find me in app/views/admin/room_users/index.html.slim
+h1 ユーザー選択
+div class="list-group"
+  - @users.each do |user|
+    div class="list-group-item" id="user-#{user.id}"
+      span = user.name
+      = link_to '退会', admin_room_user_destroy_modal_path(user), remote: true, class: 'btn btn-danger'
+- if @users.blank?
+  |現在ルームに所属しているユーザーはいません
+div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"

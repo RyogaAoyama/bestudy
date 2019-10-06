@@ -3,7 +3,6 @@ class ResultCollection extend ActiveModel::Naming
 
   def initialize(attributes = {}, num: 0)
     if attributes.present?
-      p num
       self.collection = attributes.map{ |_, value| Result.new(result: value['result'], curriculum_id: value['curriculum_id']) }
     else
       self.collection = num.times.map{ Result.new }

@@ -53,6 +53,8 @@ group :development do
   gem 'guard-rspec', require: false # guardでrspecを動かす
   gem 'terminal-notifier'
   gem 'terminal-notifier-guard'  # デスクトップ通知を行う
+  gem 'ruby-debug-ide'
+  gem 'debase'
 end
 
 
@@ -78,5 +80,3 @@ gem 'rubocop'
 gem 'bcrypt'
 gem 'rails-i18n'
 gem 'rufo'
-gem 'ruby-debug-ide'
-gem 'debase'

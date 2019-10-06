@@ -1,14 +1,19 @@
 class User < ApplicationRecord
   has_one_attached :image
-  has_one          :room, dependent: :destroy
-  has_many         :product
-  has_many         :delivery, dependent: :destroy
   belongs_to       :secret_question
-  has_many         :order_history, dependent: :destroy
-  has_many         :result, dependent: :destroy
-  has_many         :point, dependent: :destroy
+  has_one          :room, dependent: :destroy
   has_one          :point, dependent: :destroy
   has_one          :room_request, dependent: :destroy
+  has_many         :product
+  has_many         :delivery, dependent: :destroy
+  has_many         :order_history, dependent: :destroy
+  has_many         :result, dependent: :destroy
+  has_many         :product_request, dependent: :destroy
+  has_many         :special_point, dependent: :destroy
+  has_many         :good, dependent: :destroy
+  has_many         :notice, dependent: :destroy
+  has_many         :point_notice, dependent: :destroy
+  has_many         :test_result, dependent: :destroy
   # 名前
   validates :name, presence: true, length: { maximum: 30 }
   validates :name, allow_blank: true, format: { with: /\A[^,'".\\\/=\?!:;]+\z/,

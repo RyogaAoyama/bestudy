@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_30_113545) do
+ActiveRecord::Schema.define(version: 2019_10_04_233126) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -55,6 +55,25 @@ ActiveRecord::Schema.define(version: 2019_09_30_113545) do
     t.index ["user_id"], name: "index_deliveries_on_user_id"
   end
 
+  create_table "goods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_goods_on_product_id"
+    t.index ["user_id"], name: "index_goods_on_user_id"
+  end
+
+  create_table "notices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "type"
+    t.bigint "user_id"
+    t.bigint "room_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_notices_on_room_id"
+    t.index ["user_id"], name: "index_notices_on_user_id"
+  end
+
   create_table "order_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "room_id", null: false
     t.bigint "user_id", null: false
@@ -65,6 +84,19 @@ ActiveRecord::Schema.define(version: 2019_09_30_113545) do
     t.index ["product_id"], name: "index_order_histories_on_product_id"
     t.index ["room_id"], name: "index_order_histories_on_room_id"
     t.index ["user_id"], name: "index_order_histories_on_user_id"
+  end
+
+  create_table "point_notices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "get_point"
+    t.integer "type"
+    t.bigint "room_id"
+    t.bigint "user_id"
+    t.bigint "special_point_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_point_notices_on_room_id"
+    t.index ["special_point_id"], name: "index_point_notices_on_special_point_id"
+    t.index ["user_id"], name: "index_point_notices_on_user_id"
   end
 
   create_table "points", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -175,8 +207,14 @@ ActiveRecord::Schema.define(version: 2019_09_30_113545) do
   add_foreign_key "deliveries", "products"
   add_foreign_key "deliveries", "rooms"
   add_foreign_key "deliveries", "users"
+  add_foreign_key "goods", "products"
+  add_foreign_key "goods", "users"
+  add_foreign_key "notices", "rooms"
+  add_foreign_key "notices", "users"
   add_foreign_key "order_histories", "rooms"
   add_foreign_key "order_histories", "users"
+  add_foreign_key "point_notices", "rooms"
+  add_foreign_key "point_notices", "users"
   add_foreign_key "product_requests", "products"
   add_foreign_key "product_requests", "users"
   add_foreign_key "products", "rooms"

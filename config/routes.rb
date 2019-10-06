@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get 'test_results/index'
-  get 'test_results/new'
-  get 'index/new'
-  get 'index/edit'
   namespace :admin do
     resources :rooms
     resources :acounts do
@@ -15,8 +11,7 @@ Rails.application.routes.draw do
     resources :product_requests
     resources :deliveries
     resources :curriculums
-    
-    get 'room_users/index', as: 'room_users'
+    resources :room_users
   end
   get 'admin/acount/:id/edit_profile',  to: 'admin/acounts#edit_profile',    as: 'edit_profile_admin_acount'
   get 'admin/acount/:id/authentication', to: 'admin/acounts#authentication', as: 'authentication_admin_acount'
@@ -53,6 +48,8 @@ Rails.application.routes.draw do
   get 'admin/special_points/new/index', to: 'admin/special_points#index', as: 'admin_special_points'
 
   post 'admin/room_request/:id/create', to: 'admin/room_requests#create', as: 'admin_room_request_create'
+
+  get 'admin/room_user/:id/destroy_modal', to: 'admin/room_users#destroy_modal', as: 'admin_room_user_destroy_modal'
 
   get 'products/:id/index',   to: 'products#index',  as: 'products'
   get 'products/:id/buy',     to: 'products#buy',    as: 'product_buy'
