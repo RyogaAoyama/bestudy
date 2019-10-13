@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
   skip_before_action :no_correct_access
+  before_action :session_destroy, only: [:index, :login]
+
   def index
   end
 

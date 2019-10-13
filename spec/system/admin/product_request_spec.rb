@@ -42,6 +42,10 @@ describe '承諾' do
   end
 
   context '正常パターン' do
+    # 過去の自分が残した負の遺産
+    # 全てヘルパーメソッドにデータ作成の処理を詰めてしまった為に
+    # ユーザーが取得できない。id指定していたのが唯一の救い
+    let(:nomal_user) { User.find(2) }
     before do
       click_on '承諾'
     end
@@ -66,7 +70,10 @@ describe '承諾' do
       click_on '登録'
       expect{ find('#request-1') }.to raise_error(Capybara::ElementNotFound)
     end
-    it '利用者に承諾したことをお知らせする(TODO:これはお知らせ機能実装時に作る)'
+    it '利用者に承諾したことをお知らせする' do
+      click_on '登録'
+      expect(Notice.find_by(user_id: nomal_user.id)).to be_present
+    end
   end
 end
 

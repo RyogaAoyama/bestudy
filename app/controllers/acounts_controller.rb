@@ -1,5 +1,7 @@
 class AcountsController < ApplicationController
   skip_before_action :no_correct_access, only: [:nomal_new, :create, :index]
+  before_action :session_destroy, only: [:index, :nomal_new]
+  
   def nomal_new
     @user = User.new
   end

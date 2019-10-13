@@ -139,10 +139,15 @@ describe "バリデーション" do
   end
 end
 
-describe '#exec_delete' do
-  before { @product = create_product }
-  it 'Product.is_deletedがtrueに更新される' do
-    exec_delete
-    expect(@product.is_deleted).to eq true
+describe 'メソッド' do
+  let(:product) { Product.new }
+  it '#half_size_change' do
+    result = product.half_size_change('０００')
+    expect(result).to eq '000'
+  end
+
+  it '#default_image_set' do
+    product.default_image_set
+    expect(product.product_img).to be_present
   end
 end

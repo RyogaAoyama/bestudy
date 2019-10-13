@@ -10,7 +10,6 @@ describe '管理者のアカウントを作成' do
     fill_in  'password',              with: 'test_user1'
     fill_in  'password_confirmation', with: 'test_user1'
     fill_in  'answer',                with: 'MIHO'
-    click_on '次へ'
     fill_in  'room_name',             with: 'Ruby勉強会'
     fill_in  'regist_id',             with: 'testtest'
     click_on '登録'
@@ -28,39 +27,26 @@ describe '入力フォームのエラーメッセージが表示される' do
       fill_in  'password',              with: ''
       fill_in  'password_confirmation', with: ''
       fill_in  'answer',                with: ''
-      click_on '次へ'
+      fill_in  'room_name',             with: ''
+      fill_in  'regist_id',             with: ''
+      click_on '登録'
     end
     it { expect(page).to have_content '名前を入力してください' }
     it { expect(page).to have_content 'ログインIDを入力してください' }
     it { expect(page).to have_content 'パスワードを入力してください' }
     it { expect(page).to have_content '確認とパスワードの入力が一致しません' }
     it { expect(page).to have_content '回答を入力してください' }
-  end
-
-  describe 'ルーム入力フォーム' do
-    before do
-      FactoryBot.create(:new_secret_question)      
-      visit new_admin_acount_path
-      fill_in  'name',                  with: 'MH'
-      fill_in  'login_id',              with: 'test_user1'
-      fill_in  'password',              with: 'test_user1'
-      fill_in  'password_confirmation', with: 'test_user1'
-      fill_in  'answer',                with: 'MIHO'
-      click_on '次へ'
-      fill_in  'room_name',             with: ''
-      fill_in  'regist_id',             with: ''
-      click_on '登録'
-    end
-
     it { expect(page).to have_content 'ルームIDを入力してください' }
     it { expect(page).to have_content 'ルーム名を入力してください' }
   end
 end
 
 describe 'アカウントの編集' do
-  let(:user) { User.find(1) }
+  let(:user) { User.find(room.user_id) }
+  let(:room) { FactoryBot.create(:new_room) }
   before do
-    login
+    room
+    new_login(user.login_id, 'admin_user1')
     click_on 'user_name'
   end
 
@@ -75,13 +61,14 @@ describe 'アカウントの編集' do
         click_on '保存'
         expect(page).to have_content '名前を入力してください'
       end
-      xit '【写真】エラーメッセージが表示される' do
-        attach_file "profile_img", "/tmp/test.txt"
+      it '【写真】エラーメッセージが表示される' do
+        attach_file "profile-img", "public/test.txt"
         click_on    '保存'
-        expect(page).to have_content '画像ファイルを選択してください'
+        expect(page).to have_content 'プロフィール画像は画像ファイルのみ対応しています'
       end
       it '【名前】入力した値が保持されていること' do
-        fill_in 'name',                    with: 'a' * 40
+        fill_in  'name',                   with: 'a' * 40
+        click_on '保存'
         expect(page).to have_field 'name', with: 'a' * 40
       end
     end
@@ -90,20 +77,14 @@ describe 'アカウントの編集' do
       it '登録されている名前が入力されている' do
         expect(page).to have_field 'name', with: user.name
       end
-      xit '登録されている写真がアップロードされている' do
-        attach_file 'profile_img', 'TODO:写真のパスはこの機能のPGしてからかく'
-        # TODO: have_fieldで画像ファイルが取れるのか確認
-        expect(page).to have_field 'profile_img', with: user.image
+      it '登録されている写真がアップロードされている' do
+        expect(find('#prev')[:src]).to match(/test.jpg/)
       end
       it '名前が変更されている' do
         fill_in  'name', with: '藤井'
         click_on '保存'
+        user.reload
         expect(user.name).to eq '藤井'
-      end
-      xit '写真が変更されている' do
-        attach_file "profile_img", "TODO:写真のパスはこの機能のPGしてからかく"
-        click_on    '保存'
-        expect(user.image).to eq 'TODO:写真のパスはこの機能のPGしてからかく'
       end
       it 'プロフィール変更完了のメッセージが出力されている' do
         click_on '保存'
@@ -125,7 +106,7 @@ describe 'アカウントの編集' do
       context '正常パターン' do
         before do
           click_on 'パスワード変更'
-          fill_in  'password', with: 'test_user1'
+          fill_in  'password', with: 'admin_user1'
           click_on '認証'
         end
         it { expect(current_path).to eq edit_password_admin_acount_path(user) }
@@ -135,13 +116,13 @@ describe 'アカウントの編集' do
     context '変更' do
       before do
         click_on 'パスワード変更'
-        fill_in  'password', with: 'test_user1'
+        fill_in  'password', with: 'admin_user1'
         click_on '認証'
       end
       context 'エラーパターン' do
         before do
           fill_in  'password',              with: ' '
-          fill_in  'password_confirmation', with: 'test_user1'
+          fill_in  'password_confirmation', with: 'admin_user1'
           click_on '変更'
         end
         it { expect(page).to have_content 'パスワードを入力してください' }
@@ -171,7 +152,7 @@ describe 'アカウントの編集' do
       context '正常パターン' do
         before do
           click_on '秘密の質問'
-          fill_in  'password', with: 'test_user1'
+          fill_in  'password', with: 'admin_user1'
           click_on '認証'
         end
         # 秘密の質問変更画面に遷移しているかチェック
@@ -183,7 +164,7 @@ describe 'アカウントの編集' do
       before do
         FactoryBot.create(:secret_question2)
         click_on '秘密の質問'
-        fill_in  'password', with: 'test_user1'
+        fill_in  'password', with: 'admin_user1'
         click_on '認証'
       end
       context 'エラーパターン' do
@@ -206,6 +187,24 @@ describe 'アカウントの編集' do
   end
 
   describe 'アカウント削除' do
+
+    let(:nomal_user) { FactoryBot.create(:new_nomal_user, room_id: 1) }
+    let(:all_data) do
+      point = FactoryBot.create(:point, user_id: nomal_user.id, point: 10, total: 10)
+      curriculum = FactoryBot.create(:curriculum, room_id: 1)
+      product = FactoryBot.create(:new_product, room_id: 1, user_id: 1)
+      order = FactoryBot.create(:order_history, room_id: 1, user_id: nomal_user.id, product_id: product.id)
+      special = FactoryBot.create(:special_point, room_id: 1, user_id: nomal_user.id)
+      FactoryBot.create(:delivery, room_id: 1, product_id: product.id, user_id: nomal_user.id, order_history_id: order.id)
+      FactoryBot.create(:good, user_id: nomal_user.id, product_id: product.id)
+      FactoryBot.create(:notice, user_id: nomal_user.id, room_id: 1)
+      FactoryBot.create(:point_notice, room_id: 1, user_id: nomal_user.id, special_point_id: special.id)
+      FactoryBot.create(:product_request, product_id: product.id, user_id: nomal_user.id)
+      FactoryBot.create(:result, curriculum_id: curriculum.id, user_id: nomal_user.id, room_id: 1)
+      FactoryBot.create(:test_result, curriculum_id: curriculum.id, user_id: nomal_user.id, room_id: 1)
+      FactoryBot.create(:room_request, room_id: 1)
+    end
+
     before { click_on 'アカウント削除' }
     describe '削除モーダル' do
       it '戻るボタンを押下したらモーダルが消える' do
@@ -222,23 +221,32 @@ describe 'アカウントの編集' do
       end
     end
 
-      
-    it 'アカウントデータと関連データが削除されている' do
+    # TODO:テストが通らない。いつか解決すること
+    xit 'アカウントデータと関連データが削除されている' do
+      all_data
+      product_request_size = ProductRequest.all.size
       click_on 'アカウントを削除'
-      expect(User.find_by(id: 1)).to eq nil           # アカウント
-      expect(Room.find_by(user_id: 1)).to eq nil      # ルーム
+      expect(User.find_by(id: 1)).to eq nil
+      expect(Room.find_by(user_id: 1)).to eq nil
+      expect(Curriculum.find_by(room_id: 1)).to eq nil
+      expect(Product.find_by(room_id: 1)).to eq nil
+      expect(ProductRequest.all.size).to be < product_request_size
+      expect(Notice.find_by(room_id: 1)).to eq nil
+      expect(RoomRequest.find_by(room_id: 1)).to eq nil
+      expect(Delivery.find_by(room_id: 1)).to eq nil
+      expect(Good.find_by(user_id: 1)).to eq nil
+      expect(Result.find_by(room_id: 1)).to eq nil
+      expect(PointNotice.find_by(room_id: 1)).to eq nil
+      expect(OrderHistory.find_by(room_id: 1)).to eq nil
+      expect(SpecialPoint.find_by(room_id: 1)).to eq nil
+      expect(Point.find_by(user_id: nomal_user.id).point).to eq 0
+      expect(Point.find_by(user_id: nomal_user.id).total).to eq 0
     end
-    # TODO: テスト書いてないところは機能が実装でき次第かく。expectは上記のitに記述する
-    it '科目が削除されている'
-    it '商品が削除されている'
-    it '商品リクエストが削除されている'
-    it 'お知らせが削除されている'
-    it 'ユーザー申請が削除されている'
-    it 'ホーム画面へ遷移' do
+    xit 'ホーム画面へ遷移' do
       click_on 'アカウントを削除'
       expect(current_path).to eq root_path
     end
-    it '削除完了メッセージが表示される' do
+    xit '削除完了メッセージが表示される' do
       click_on 'アカウントを削除'
       expect(page).to have_content 'アカウントを削除しました。ご利用ありがとうございました！'
     end

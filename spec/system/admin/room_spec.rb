@@ -30,7 +30,5 @@ describe 'ルーム編集' do
     it '登録されている値が保持されていること' do
       expect(page).to have_field 'room_name', with: 'test_room'
     end
-    #TODO: お知らせ機能作るときに
-    it 'グループに所属している人にお知らせが届いている'
   end
 end

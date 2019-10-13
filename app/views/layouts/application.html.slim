@@ -24,8 +24,8 @@ html
         = link_to '特別ポイント入力', admin_special_points_path
         = link_to '申請承諾', admin_room_requests_path
         = link_to 'ユーザー一覧', admin_room_users_path
-      / TODO:プロフィール画像が登録できない問題
-        /= image_tag current_user.image, class: "rounded-circle", width: "33", height: "33" 
+        - if current_user.image.attached?
+          = image_tag current_user.image, class: "rounded-circle", width: "33", height: "33"
 
     .container
       - if flash[:notice]

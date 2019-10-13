@@ -31,8 +31,7 @@ describe '成績' do
       end
       it '一覧の項目が全て表示されている' do
         expect(page).to have_content nomal_user.name
-        # TODO:これはユーザー写真登録ができてから
-        # expect(find("#img-#{ nomal_user.id }")[:src]).to match 'public/test.jpg'
+        expect(find("#img-#{ nomal_user.id }")[:src]).to match(/test.jpg/)
       end
     end
   end
@@ -72,8 +71,14 @@ describe '成績' do
       end
     end
 
+    context '削除された科目が存在する場合' do
+      let(:delete_curriculum) { FactoryBot.create(:curriculum_sequence, is_deleted: true, name: '削除科目', room_id: room.id) }
+      it '成績入力画面から削除した科目が非表示になっている' do
+        expect(page).to_not have_content delete_curriculum.name
+      end
+    end
+
     context '科目が存在する場合' do
-      # 科目が存在しない場合のletが適用されるか確認
       before { curriculums }
       it '成績入力分のポイントが表示される' do
         choose "a-#{ curriculums[0].id }"
@@ -133,8 +138,9 @@ describe '成績' do
         it 'ユーザーにポイントが付与されている' do
           expect(nomal_user.point.point).to eq 300
         end
-        # TODO:お知らせ機能ついたら
-        it 'ユーザーにお知らせする'
+        it 'ユーザーにお知らせする' do
+          expect(PointNotice.find_by(user_id: nomal_user.id)).to be_present
+        end
       end
     end
   end

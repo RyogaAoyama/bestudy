@@ -3,7 +3,8 @@ class Product < ApplicationRecord
   belongs_to       :room
   belongs_to       :user
   has_one          :product_request, dependent: :destroy
-  has_many         :delivery
+  has_many         :delivery, dependent: :destroy
+  has_many         :good, dependent: :destroy
   # 商品名
   validates :name, presence: true, length: { maximum: 30 }
 

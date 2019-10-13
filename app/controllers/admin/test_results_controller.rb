@@ -20,11 +20,17 @@ class Admin::TestResultsController < ApplicationController
     @test_result.score = @test_result.half_size_change(test_result_params[:score])
     if @test_result.save
       point = Point.find_by(user_id: params[:acount_id])
-      point.point = point.add_point(@test_result.score, point.point)
+      point.point += @test_result.score
       point.save
       flash[:notice] = 'テストの登録が完了しました'
       redirect_to admin_test_results_path
-      # TODO:お知らせ
+
+      PointNotice.new(
+        user_id: params[:acount_id],
+        room_id: owner_room.id,
+        get_point: @test_result.score,
+        type: 3
+      ).save
     else
       @curriculums = owner_room.curriculum.where(is_deleted: false)
       render :new

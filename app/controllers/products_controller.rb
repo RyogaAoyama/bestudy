@@ -4,7 +4,6 @@ class ProductsController < ApplicationController
   end
 
   def new
-    #TODO: デフォルト画像挿入
     @product = Product.new
   end
 
@@ -17,12 +16,6 @@ class ProductsController < ApplicationController
     else
       render :new
     end
-  end
-
-  def buy
-  end
-
-  def history
   end
 
   private

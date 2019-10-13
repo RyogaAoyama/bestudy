@@ -5,16 +5,6 @@ class Admin::ProductRequestsController < ApplicationController
     @products = Product.where(id: product_ids)
   end
 
-  def new
-    #TODO: これはリクエストのテスト用だからいらなくなったら消す
-    file = File.open("public/test.jpg")
-    product = Product.new(name:"リクエスト", point: 200, room_id: 1, user_id: 2)
-    product.product_img.attach(io: file, filename: "test.jpg")
-    product.save!
-    ProductRequest.new(user_id:2, product_id:product.id).save!
-    redirect_to admin_product_requests_url
-  end
-
   def edit
     @product = Product.find(params[:id])
   end
@@ -23,6 +13,14 @@ class Admin::ProductRequestsController < ApplicationController
     @product = Product.find(params[:id])
     if @product.update(product_params)
       flash[:notice] = "「#{ @product.name }」を承諾しました"
+      
+      # お知らせ
+      Notice.new(
+        user_id: ProductRequest.find_by(product_id: params[:id]).user_id,
+        room_id: owner_room.id,
+        type: 2
+      ).save
+      
       ProductRequest.find_by(product_id: params[:id]).destroy
       redirect_to admin_product_requests_url
     else

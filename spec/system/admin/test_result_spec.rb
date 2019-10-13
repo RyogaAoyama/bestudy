@@ -24,8 +24,7 @@ describe 'テスト入力機能' do
         nomal_user
         visit admin_test_results_path
         expect(page).to have_content nomal_user.name
-        # TODO:これはユーザー写真登録ができてから
-        # expect(find("#img-#{ nomal_user.id }")[:src]).to match 'public/test.jpg'
+        expect(find("#img-#{ nomal_user.id }")[:src]).to match(/test.jpg/)
       end
     end
   end
@@ -60,7 +59,7 @@ describe 'テスト入力機能' do
   end
 
   describe 'テスト登録' do
-    let(:in_test) { fill_in 'test', with: 100 }
+    let(:in_test) { fill_in 'score', with: 100 }
     before do
       curriculums
       nomal_user
@@ -89,6 +88,9 @@ describe 'テスト入力機能' do
           expect(current_path).to eq admin_test_results_path
           expect(page).to have_content 'テストの登録が完了しました'
         end
+      end
+      it 'ユーザーにお知らせする' do
+        expect(PointNotice.find_by(user_id: nomal_user.id)).to be_present
       end
     end
   end

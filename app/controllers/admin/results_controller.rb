@@ -17,10 +17,18 @@ class Admin::ResultsController < ApplicationController
 
       # ポイントの計算と保存
       point = Point.find_by(user_id: params[:acount_id])
-      point.point += point.result_calc(@results.collection)
+      get_point = point.result_calc(@results.collection)
+      point.point += get_point
       point.save
 
-      # TODO: お知らせ
+      # お知らせ
+      PointNotice.new(
+        user_id: params[:acount_id],
+        room_id: owner_room.id,
+        get_point: get_point,
+        type: 1
+      ).save!
+
       flash[:notice] = '登録が完了しました'
       redirect_to admin_results_url
     else

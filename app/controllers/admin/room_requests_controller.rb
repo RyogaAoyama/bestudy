@@ -15,7 +15,12 @@ class Admin::RoomRequestsController < ApplicationController
 
     RoomRequest.find_by(user_id: user.id).destroy
 
-    # TODO:お知らせ機能もそのうち
+    Notice.new(
+      user_id: user.id,
+      room_id: owner_room.id,
+      type: 1
+    ).save
+
     flash[:notice] = "#{ user.name }を承認しました"
     redirect_to admin_room_requests_url
   end

@@ -1,9 +1,7 @@
 h1 商品一覧
-/ TODO:newのパス書いてなかったらeditのパス書いてても自動でnewに遷移するから一旦かいとく。そのうち修正する
-= link_to "なぜかnew_pathがないとedit_pathが自動でnewに遷移するから一旦かいとく。", new_admin_product_request_path 
 - @products.each do |product|
     div class="card" style="width: 18rem;" id="request-#{ product.id }"
-      = image_tag product.product_img, class: "card-img-top product_img", alt: "カードの画像", id: "img-#{product.id}"
+      = image_tag product.product_img, class: "card-img-top product_img", alt: "カードの画像", id: "img-#{ product.id }"
       div class="card-body"
         small class="card-title" = l(product.created_at, format: :default)
         h5 class="card-title" = "#{ product.user.name }さんからのリクエスト"

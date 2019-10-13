@@ -18,11 +18,18 @@ class Admin::SpecialPointsController < ApplicationController
     @special_point.point = @special_point.half_size_change(special_point_params[:point])
     if @special_point.save
       point = Point.find_by(user_id: params[:acount_id])
-      point.point = point.add_point(@special_point.point, point.point)
+      point.point += @special_point.point
       point.save
       flash[:notice] = "#{ User.find(params[:acount_id]).name }に特別ポイントを送りました"
       redirect_to admin_special_points_path
-      # TODO:お知らせ
+      
+      PointNotice.new(
+        user_id: params[:acount_id],
+        room_id: owner_room.id,
+        get_point: @special_point.point,
+        special_point_id: @special_point.id,
+        type: 2
+      ).save
     else
       render :new
     end

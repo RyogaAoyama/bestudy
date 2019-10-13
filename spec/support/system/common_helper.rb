@@ -69,8 +69,4 @@ module CommonHelper
       order_history_id: order_history.id
     )
   end
-
-  def create_order_history
-    #TODO: 必要になったら作る
-  end
 end

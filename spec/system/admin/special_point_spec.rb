@@ -23,8 +23,7 @@ describe '特別ポイント機能' do
     context 'ユーザーが存在する場合' do
       it 'ユーザー一覧の項目が全て表示されている' do
         expect(page).to have_content nomal_user.name
-        # TODO:これはユーザー写真登録ができてから
-        # expect(find("#img-#{ nomal_user.id }")[:src]).to match 'public/test.jpg'
+        expect(find("#img-#{ nomal_user.id }")[:src]).to match(/test.jpg/)
       end
     end
   end
@@ -69,8 +68,10 @@ describe '特別ポイント機能' do
         expect(current_path).to eq admin_special_points_path
         expect(page).to have_content "#{ nomal_user.name }に特別ポイントを送りました"
       end
-      # TODO: お知らせ機能実装時に
-      it 'お知らせ'
+
+      it 'ユーザーにお知らせする' do
+        expect(PointNotice.find_by(user_id: nomal_user.id)).to be_present
+      end
     end
   end
 end

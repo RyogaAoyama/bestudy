@@ -2,6 +2,8 @@ h1 ユーザー選択
 div class="list-group"
   - @users.each do |user|
     div class="list-group-item" id="user-#{user.id}"
+      - if user.image.attached?
+        = image_tag user.image, class: "rounded-circle", width: "33", height: "33", id: "img-#{ user.id }"
       span = user.name
       = link_to '退会', admin_room_user_destroy_modal_path(user), remote: true, class: 'btn btn-danger'
 - if @users.blank?

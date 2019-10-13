@@ -29,4 +29,9 @@ class ApplicationController < ActionController::Base
       redirect_to login_url
     end
   end
+
+  # セッションを削除する
+  def session_destroy
+    session.delete(:id) if session[:id]
+  end
 end

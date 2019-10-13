@@ -1,20 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Room, type: :model do
-  describe '登録' do
-    let(:room) { FactoryBot.create(:new_room) }
-    before do
-      room
-    end
-
-    it 'ルーム名が保存されている' do
-      expect(room.name).to eq 'test_room2'
-    end
-    it 'ルームIDが保存されている' do
-      expect(room.regist_id).to eq 'test_room2'
-    end
-  end
-
   describe 'エラーチェック' do
     room = Room.new
     let(:err_messages) { room.errors.messages[:regist_id] }

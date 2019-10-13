@@ -7,6 +7,11 @@ FactoryBot.define do
     password { "test_user1" }
     is_admin { true }
     secret_question_id { 1 }
+    after(:create) do |user|
+      File.open('public/test.jpg') do |f|
+        user.image.attach(io: f, filename: "test.jpg")
+      end
+    end
   end
 
   factory :nomal_user, class: User do
@@ -22,12 +27,16 @@ FactoryBot.define do
 
   factory :new_nomal_user, class: User do
     association :secret_question, factory: :new_secret_question
-    id { 4 }
-    sequence(:name, 3) { |i| "テストユーザー#{ i }"}
-    sequence(:login_id, 3) { |i| "test_user#{ i }"}
-    sequence(:password, 3) { |i| "test_user#{ i }"}
+    sequence(:name, 3) { |i| "テストユーザー#{ i }" }
+    sequence(:login_id, 3) { |i| "test_user#{ i }" }
+    sequence(:password, 3) { |i| "test_user#{ i }" }
     answer { "大元小学校" }
     is_admin { false }
+    after(:create) do |user|
+      File.open('public/test.jpg') do |f|
+        user.image.attach(io: f, filename: "test.jpg")
+      end
+    end
   end
 
   factory :new_admin_user, class: User do
@@ -37,5 +46,10 @@ FactoryBot.define do
     password { "admin_user1" }
     answer { "大元小学校" }
     is_admin { true }
+    after(:create) do |user|
+      File.open('public/test.jpg') do |f|
+        user.image.attach(io: f, filename: "test.jpg")
+      end
+    end
   end
 end

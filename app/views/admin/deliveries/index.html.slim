@@ -1,6 +1,4 @@
 h1 注文一覧
-/ TODO:いらなくなったら消す
-/= link_to "テストデータ作成", new_admin_delivery_path, class: "btn btn-primary"
 div class="list-group"
   - @deliveries.each do |delivery|
     = link_to admin_delivery_path(delivery), class: "list-group-item list-group-item-action", id: "order-#{delivery.id}" do

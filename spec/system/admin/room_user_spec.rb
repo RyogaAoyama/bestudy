@@ -42,8 +42,7 @@ describe 'ルームに所属するユーザー一覧機能' do
       end
       it '一覧の項目が全て表示されている' do
         expect(page).to have_content nomal_user.name
-        # TODO:これはユーザー写真登録ができてから
-        # expect(find("#img-#{ nomal_user.id }")[:src]).to match 'public/test.jpg'
+        expect(find("#img-#{ nomal_user.id }")[:src]).to match(/test.jpg/)
       end
       it '強制退会' do
         point

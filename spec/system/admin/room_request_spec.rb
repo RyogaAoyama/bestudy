@@ -29,8 +29,7 @@ describe 'ユーザー承認機能' do
       it '一覧の項目が全て表示されている' do
         expect(page).to have_content nomal_user.name
         expect(page).to have_content room_request.created_at.strftime('%Y/%m/%d')
-        # TODO:これはユーザー写真登録ができてから
-        # expect(find("#img-#{ nomal_user.id }")[:src]).to match 'public/test.jpg'
+        expect(find("#img-#{ nomal_user.id }")[:src]).to match(/test.jpg/)
       end
     end
   end
@@ -49,8 +48,10 @@ describe 'ユーザー承認機能' do
         expect(current_path).to eq admin_room_requests_path
         expect(page).to have_content "#{ nomal_user.name }を承認しました"
       end
-      # TODO:お知らせ機能実装時に
-      it 'ユーザーにお知らせする'
+
+      it 'ユーザーにお知らせする' do
+        expect(Notice.find_by(user_id: nomal_user.id)).to be_present
+      end
     end
 
     context '拒否' do

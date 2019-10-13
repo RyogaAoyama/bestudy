@@ -11,6 +11,8 @@ class A
     a = 1/0
   end
 end
+def void(a)
+  p a
+end
 
-e = A.new
-e.error_method
+true && void("aa")

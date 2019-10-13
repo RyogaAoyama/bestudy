@@ -1,9 +1,11 @@
 h1 ユーザー選択
 div class="list-group"
   - @room_requests.each do |requets|
-    - user_id = requets.user_id
-    = link_to admin_room_request_path(user_id), class: "list-group-item list-group-item-action", id: "user-#{ user_id }" do
+    - user = User.find(requets.user_id)
+    = link_to admin_room_request_path(user), class: "list-group-item list-group-item-action", id: "user-#{ user.id }" do
+      - if user.image.attached?
+        = image_tag user.image, class: "rounded-circle", width: "33", height: "33", id: "img-#{ user.id }"
       small = l(requets.created_at, format: :times)
-      div = User.find(user_id).name
-- if @users.blank?
+      div = user.name
+- if @room_requests.blank?
   |現在リクエストは存在しません

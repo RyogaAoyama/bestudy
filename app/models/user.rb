@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+
   has_one_attached :image
   belongs_to       :secret_question
   has_one          :room, dependent: :destroy
@@ -56,4 +57,21 @@ class User < ApplicationRecord
   validates :answer, allow_blank: true, 
     format: { with: /\A[^,'".\\\/=\?!:;]+\z/, message: 'に不正な文字が含まれています' },
     length: { maximum: 50 }
+
+  validate :check_image
+  def check_image
+    return unless image.attached?
+    whitelist = %w[image/jpeg image/png image/bmp]
+    if whitelist.exclude?(image.blob.content_type)
+      errors.add(:image, 'は画像ファイルのみ対応しています')
+    end
+  end
+
+  def default_image_set
+    unless image.attached?
+      File.open('public/default.jpg') do |f|
+        self.image.attach(io: f, filename: "default.jpg")
+      end
+    end
+  end
 end

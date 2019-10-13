@@ -116,7 +116,5 @@ describe '科目' do
       find('#modal_outer').click
       expect(page).to_not have_selector '#modal'
     end
-    #TODO: 成績入力作成したときに作る
-    xit '成績入力画面から削除した科目が非表示になっている'
   end
 end

@@ -1,10 +1,9 @@
 class Admin::AcountsController < ApplicationController
   skip_before_action :no_correct_access, only: [:new, :create]
+  before_action :session_destroy, only: [:new]
   def new
     @user = User.new
-  end
-
-  def show
+    @room = Room.new
   end
 
   def edit_profile
@@ -35,20 +34,26 @@ class Admin::AcountsController < ApplicationController
       @user = current_user
     else
       flash[:alert] = 'パスワードが一致しません'
-      # TODO:renderでやると認証画面で更新かけたときにルーティングエラーでる。URLがedit_passwordに変わるから
       redirect_to authentication_admin_acount_path(current_user)
     end
   end
 
   def create
     @user = User.new(user_params)
-    if @user.valid?
-      # ルーム作成の時に一緒にユーザーを登録するため
-      # 一旦セッションにユーザー情報格納
-      session[:user] = @user
-      redirect_to new_admin_room_url
+    @room = Room.new(room_params)
+    @user.default_image_set
+    # rubyの仕様でfalseの瞬間判定値が返却されるためvalidを先に実行
+    # 何か良いやり方ないかな
+    @room.valid?
+    if @user.valid? && @room.valid?
+      @user.save
+      @room.user_id = @user.id
+      @room.save
+      flash[:notice] = "登録が完了しました。ようこそ！#{ @user.name }さん！"
+      session[:id] = @user.id
+      redirect_to admin_products_url
     else
-      render :new
+      render action: :new
     end
   end
 
@@ -67,7 +72,7 @@ class Admin::AcountsController < ApplicationController
     end
   end
 
-  # 名前アップデート
+  # 名前とプロフィール画像の保存
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
@@ -90,7 +95,11 @@ class Admin::AcountsController < ApplicationController
   end
 
   def destroy
+    room_id = owner_room.id
     if current_user.destroy
+      p User.where(room_id: room_id).update_all(room_id: '')
+      p "aaa"
+      p Point.where(room_id: room_id).update_all(point: 0, total: 0)
       flash[:alert] = 'アカウントを削除しました。ご利用ありがとうございました！'
       redirect_to root_path
       session[:id] = nil
@@ -112,5 +121,9 @@ class Admin::AcountsController < ApplicationController
       :is_admin,
       :image
     )
+  end
+
+  def room_params
+    params.require(:room).permit(:name, :regist_id)
   end
 end
