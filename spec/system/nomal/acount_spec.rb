@@ -3,7 +3,30 @@ require 'rails_helper'
 
 describe '利用者のアカウントを作成' do
   before do
+    FactoryBot.create(:secret_question)
     visit nomal_new_path
+  end
+
+  context '登録完了' do
+    before do
+      fill_in 'name', with: "ゆーざー１"
+      fill_in 'login_id', with: "testuser1"
+      fill_in 'password', with: "testuser1"
+      fill_in 'password_confirmation', with: 'testuser1'
+      fill_in 'answer', with: "秘密や"
+      click_on '登録'
+    end
+
+    it '登録完了メッセージが表示される' do
+      expect(page).to have_content '登録が完了しました。ようこそ！ゆーざー１さん！'
+    end
+    it 'ユーザーレコードが作成されている' do
+      expect(User.find_by(login_id: 'testuser1')).to be_present
+    end
+    it 'ポイントレコードが作成されている' do
+      user = User.find_by(login_id: 'testuser1')
+      expect(Point.find_by(user_id: user.id)).to be_present
+    end
   end
 
   shared_examples 'エラーメッセージが表示されている' do |msg|
@@ -172,7 +195,6 @@ describe '利用者のアカウントを作成' do
     describe '重複チェック' do
       context '重複したログインIDが登録された場合' do
         before do
-          FactoryBot.create(:secret_question)
           FactoryBot.create(:user)
           fill_in 'login_id', with: User.find(1).login_id
           click_on '登録'

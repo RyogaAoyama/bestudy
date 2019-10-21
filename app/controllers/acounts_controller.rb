@@ -17,7 +17,11 @@ class AcountsController < ApplicationController
 
   def create
     @user = User.new(get_regist_user)
+    @user.default_image_set
     if @user.save
+      # ポイントレコード生成
+      Point.new(user_id: @user.id, total: 0, point: 0).save
+
       session[:id] = @user.id
       flash[:notice] = "登録が完了しました。ようこそ！#{ @user.name }さん！"
       redirect_to products_path(@user)
@@ -34,7 +38,8 @@ class AcountsController < ApplicationController
       :password,
       :password_confirmation,
       :secret_question_id,
-      :answer
+      :answer,
+      :image
     )
   end
 end
