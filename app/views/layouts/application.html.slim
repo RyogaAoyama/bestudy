@@ -12,7 +12,7 @@ html
     nav.navbar.navbar-light.bg-light
       .navbar-brand Best Study
       
-      - if current_user
+      - if current_user.is_admin
         = link_to 'ログアウト', logout_path
         = link_to current_user.name, admin_acount_path(current_user), id: 'user_name'
         = link_to 'リクエスト一覧', admin_product_requests_path
