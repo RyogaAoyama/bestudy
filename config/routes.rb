@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'room_requests/new'
   namespace :admin do
     resources :rooms
     resources :acounts do

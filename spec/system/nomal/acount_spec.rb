@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 require 'rails_helper'
 
 describe '利用者のアカウントを作成' do
