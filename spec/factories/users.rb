@@ -52,4 +52,20 @@ FactoryBot.define do
       end
     end
   end
+
+  # login_idとpasswordが固定のため新しいの作った
+  # 被っちゃダメなデータは必ず必ずシーケンス使うこと
+  factory :new_admin_user2, class User do
+    association :secret_question, factory: :new_secret_question2
+    sequence(:name) { |i| "管理ユーザー#{ i }" }
+    sequence(:login_id) { |i| "admin_user#{ i }" }
+    sequence(:password) { |i| "admin_user#{ i }" }
+    answer { "小学校" }
+    is_admin { true }
+    after(:create) do |user|
+      File.open('public/test.jpg') do |f|
+        user.image.attach(io: f, filename: "test.jpg")
+      end
+    end
+  end
 end

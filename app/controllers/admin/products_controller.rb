@@ -1,8 +1,5 @@
 class Admin::ProductsController < ApplicationController
   def index
-    p session[:id]
-    p current_user
-    p owner_room
     @products = owner_room.product.where(is_deleted: false)
   end
 

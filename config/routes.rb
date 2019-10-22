@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'products/index'
   namespace :admin do
     resources :rooms
     resources :acounts do
