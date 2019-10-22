@@ -27,4 +27,6 @@ ja:
       special_point:
         point: 特別ポイント
         message: メッセージ
+      room_request:
+        regist_id: ルーム
         

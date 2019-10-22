@@ -12,20 +12,30 @@ html
     nav.navbar.navbar-light.bg-light
       .navbar-brand Best Study
       
-      - if current_user.is_admin
-        = link_to 'ログアウト', logout_path
-        = link_to current_user.name, admin_acount_path(current_user), id: 'user_name'
-        = link_to 'リクエスト一覧', admin_product_requests_path
-        = link_to '注文一覧', admin_deliveries_path
-        = link_to '商品一覧', admin_products_path
-        = link_to '科目一覧', admin_curriculums_path
-        = link_to '成績入力', admin_results_path
-        = link_to 'テスト入力', admin_test_results_path
-        = link_to '特別ポイント入力', admin_special_points_path
-        = link_to '申請承諾', admin_room_requests_path
-        = link_to 'ユーザー一覧', admin_room_users_path
-        - if current_user.image.attached?
-          = image_tag current_user.image, class: "rounded-circle", width: "33", height: "33"
+      // 管理人
+      - if current_user
+        - if current_user.is_admin
+          = link_to 'ログアウト', logout_path
+          = link_to current_user.name, admin_acount_path(current_user), id: 'user_name'
+          = link_to 'リクエスト一覧', admin_product_requests_path
+          = link_to '注文一覧', admin_deliveries_path
+          = link_to '商品一覧', admin_products_path
+          = link_to '科目一覧', admin_curriculums_path
+          = link_to '成績入力', admin_results_path
+          = link_to 'テスト入力', admin_test_results_path
+          = link_to '特別ポイント入力', admin_special_points_path
+          = link_to '申請承諾', admin_room_requests_path
+          = link_to 'ユーザー一覧', admin_room_users_path
+          - if current_user.image.attached?
+            = image_tag current_user.image, class: "rounded-circle", width: "33", height: "33"
+        // 一般
+        - else
+          = link_to 'ログアウト', logout_path
+          = link_to current_user.name, acount_path(current_user), id: 'user_name'
+          - if current_user.image.attached?
+            = image_tag current_user.image, class: "rounded-circle", width: "33", height: "33"
+
+
 
     .container
       - if flash[:notice]

@@ -19,7 +19,7 @@ class Admin::RoomRequestsController < ApplicationController
       user_id: user.id,
       room_id: owner_room.id,
       type: 1
-    ).save
+    ).save!
 
     flash[:notice] = "#{ user.name }を承認しました"
     redirect_to admin_room_requests_url

@@ -1,0 +1,8 @@
+h1 ルーム申請
+= form_with model: @room_request, id: 'room-request-form' do |f|
+  .form-row
+  .form-group.col-12
+    = f.label :regist_id
+    = f.text_field :regist_id, id: 'name', class: 'form-control'
+    p = get_validate_msg( @room_request, :regist_id )
+= link_to '登録', create_modal_room_request_path, remote: true, class: 'btn btn-primary'

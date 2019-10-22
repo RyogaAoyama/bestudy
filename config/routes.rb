@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'room_requests/new'
   namespace :admin do
     resources :rooms
     resources :acounts do
@@ -57,7 +56,8 @@ Rails.application.routes.draw do
   get 'products/:id/request', to: 'product#request', as: 'product_request'
   get 'products/:id/history', to: 'product#history', as: 'product_history'
 
-
+  resources :room_requests, only: [:new, :create]
+  get 'room_request/new/create_modal', to: 'room_requests#create_modal', as: 'create_modal_room_request'
   resources :acounts
   get 'acounts/new/nomal_new', to: 'acounts#nomal_new', as: 'nomal_new'
 

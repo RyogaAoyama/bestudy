@@ -1,2 +1,19 @@
-h1 RoomRequests#new
-p Find me in app/views/room_requests/new.html.slim
+h1 ルーム申請
+- if @is_applied
+  = form_with model: @room_request, id: 'room-request-form' do |f|
+    .form-row
+    .form-group.col-12
+      = f.label :regist_id
+      = f.text_field :regist_id, id: 'regist_id', class: 'form-control'
+      p = get_validate_msg( @room_request, :regist_id )
+  = link_to 'ルーム申請', create_modal_room_request_path, remote: true, class: 'btn btn-primary'
+- else
+  = form_with model: @room_request, local: true, id: 'room-request-form' do |f|
+    .form-row
+      .form-group.col-12
+        = f.label :regist_id
+        = f.text_field :regist_id, id: 'regist_id', class: 'form-control'
+        p = get_validate_msg( @room_request, :regist_id )
+    = f.submit 'ルーム申請', class: 'btn btn-primary'
+
+div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"
