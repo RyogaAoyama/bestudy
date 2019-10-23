@@ -23,6 +23,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # 所属しているルームを取得
+  def belongs_to_room
+    if session[:id]
+      @belongs_to_room ||= Room.find_by(id:current_user&.room_id)
+    end
+  end
+
   # 認証していないユーザーからのアクセスをブロック
   def no_correct_access
     unless current_user

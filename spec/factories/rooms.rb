@@ -14,6 +14,6 @@ FactoryBot.define do
   factory :new_room2, class: Room do
     association :user, factory: :new_admin_user2
     sequence(:regist_id) { |i|"test_room#{ i }" }
-    sequence(:name) { "test_room#{ i }" }
+    sequence(:name) { |i| "test_room#{ i }" }
   end
 end

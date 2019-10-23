@@ -55,7 +55,7 @@ FactoryBot.define do
 
   # login_idとpasswordが固定のため新しいの作った
   # 被っちゃダメなデータは必ず必ずシーケンス使うこと
-  factory :new_admin_user2, class User do
+  factory :new_admin_user2, class: User do
     association :secret_question, factory: :new_secret_question2
     sequence(:name) { |i| "管理ユーザー#{ i }" }
     sequence(:login_id) { |i| "admin_user#{ i }" }

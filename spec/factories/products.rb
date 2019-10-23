@@ -31,7 +31,7 @@ FactoryBot.define do
     trait :association do
       association :room, factory: :new_room2
     end
-    sequence(name) { |i| "商品名#{ i }" }
+    sequence(:name) { |i| "商品名#{ i }" }
     point { 200 }
     is_deleted { false }
     after(:create) do |product|

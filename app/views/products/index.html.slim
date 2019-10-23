@@ -1,2 +1,15 @@
-h1 Products#index
-p Find me in app/views/products/index.html.slim
+h1 商品一覧
+- if current_user.room_id.blank?
+ |現在、ルームに所属していません。ルーム申請してみましょう！
+ = link_to 'ルーム申請する', new_room_request_path(current_user), class: 'btn btn-primary'
+- elsif @products.blank?
+  |現在、商品がありません。商品をリクエストしてみましょう！
+  / TODO: 商品リクエスト完成したらここのパス変える
+  = link_to '商品をリクエストする', new_admin_product_path(current_user), class: 'btn btn-primary'
+- else
+  - @products.each do |product|
+      div class="card" style="width: 18rem;" id="product-#{ product.id }"
+        = image_tag product.product_img, class: "card-img-top product_img", alt: "カードの画像"
+        div class="card-body"
+          h5 class="card-title" = product.name
+          p class="card-title" = product.point
