@@ -7,38 +7,39 @@ describe '商品購入機能' do
   let(:point) { FactoryBot.create(:point, user_id: user.id, point: 500) }
 
   before do
+    point
     room
     product
     user
     new_login('test_user1', 'test_user1')
-    clcik_on '購入'
+    click_on '購入'
   end
 
   it '購入確認モーダルの項目が全て表示されている' do
     expect(page).to have_content product.name
     expect(page).to have_content product.point
-    expect(find('#img')[:src]).to match(/public\/test.jpg/)
+    expect(find('#img')[:src]).to match(/test.jpg/)
   end
 
   it '購入が完了する' do
-    clcik_on '購入する'
+    find('#modal')
+    click_on '購入する'
     expect(page).to have_content "#{ product.name }を購入しました。"
-    expect(current_path).to eq products_path
   end
 
   it '購入完了したらデータが追加されている' do
-    clcik_on '購入する'
+    find('#modal')
+    click_on '購入する'
     expect(OrderHistory.where(user_id: user.id).size).to eq 1
     expect(Delivery.where(user_id: user.id).size).to eq 1
-    expect(Notice.where(user_id: user.id)).to eq 1
+    expect(Notice.where(user_id: user.id).size).to eq 1
   end
 
   context 'ポイントが足りなかった場合' do
     let(:point) { FactoryBot.create(:point, user_id: user.id, point: 0) }
     it 'エラーメッセージを表示' do
-      clcik_on '購入する'
-      expect(current_path).to eq products_path
-      expect(page).to have_content "ポイントが足りません。"
+      click_on '購入する'
+      expect(page).to have_content 'ポイントが足りません。'
     end
   end
 end

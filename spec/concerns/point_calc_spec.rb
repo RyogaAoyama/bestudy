@@ -24,37 +24,4 @@ describe PointCalc do
       expect(result).to eq 20
     end
   end
-
-  describe '#buy?(pointObj, product.point)' do
-    let(:user) { FactoryBot.build(:new_nomal_user) }
-    let(:point) { FactoryBot.build(:point, user_id: user.id, point: 0, total: 0) }
-    let(:product) { FactoryBot.build(:product, point: 300, user_id: user.id) }
-    context 'ポイントが足りなかった場合' do
-      it 'falseを返却' do
-        expect(PointCalc.buy_calc(point, product.point)).to be_falsey
-      end
-    end
-
-    context 'ポイントが足りる場合' do
-      let(:point) { FactoryBot.build(:point, user_id: user.id, point: 5000, total: 0) }
-      it 'trueを返す' do
-        expect(PointCalc.buy_calc(point, product.point)).to be_falsey
-      end
-    end
-  end
-
-  describe '#buy_calc(pointObj, product.point)' do
-    let(:user) { FactoryBot.build(:new_nomal_user) }
-    let(:point) { FactoryBot.build(:point, user_id: user.id, point: 500, total: 0) }
-    let(:product) { FactoryBot.build(:new_product2, point: 300) }
-    it 'ポイントが計算されている' do
-      point = PointCalc.buy_calc(point, product.point)
-      expect(point.point).to eq 200
-    end
-
-    it '使った総額が計算されている' do
-      point = PointCalc.buy_calc(point, product.point)
-      expect(point.total).to eq 300
-    end
-  end
 end

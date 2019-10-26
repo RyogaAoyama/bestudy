@@ -1,18 +1,18 @@
 
 class A
   def error_method
-    test_method
+    if true
+      test_method
+    end
+    p 'mazika'
     rescue
       p 'error'
-    p 'mazika'
   end
 
   def test_method
     a = 1/0
   end
 end
-def void(a)
-  p a
-end
-
-true && void("aa")
+# a = A.new
+# a.error_method
+ p !6.negative?
