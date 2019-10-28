@@ -30,6 +30,7 @@ html
             = image_tag current_user.image, class: "rounded-circle", width: "33", height: "33"
         // 一般
         - else
+          = link_to '注文履歴', order_histories_path
           = link_to 'ログアウト', logout_path
           = link_to current_user.name, acount_path(current_user), id: 'user_name'
           - if current_user.image.attached?

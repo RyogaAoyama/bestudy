@@ -60,6 +60,7 @@ Rails.application.routes.draw do
   get 'room_request/new/create_modal', to: 'room_requests#create_modal', as: 'create_modal_room_request'
   resources :acounts
   resources :products, only: [:index]
+  resources :order_histories, only: [:index]
   post 'product/:id/buys/create', to: 'buys#create', as: 'buys'
   get 'product/:id/buys/create_modal', to: 'buys#create_modal', as: 'create_modal_buy'
   get 'acounts/new/nomal_new', to: 'acounts#nomal_new', as: 'nomal_new'
