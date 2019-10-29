@@ -1,2 +1,20 @@
-h1 OrderHistories#index
-p Find me in app/views/order_histories/index.html.slim
+h1 注文履歴
+div class="list-group"
+  - @order_histories.each do |order|
+    - product = Product.find(order.product_id)
+    div class="list-group-item" id="user-#{order.id}"
+      - if product.product_img.attached?
+        = image_tag product.product_img, class: "rounded-circle", width: "33", height: "33", id: "img-#{ order.id }"
+      span = "#{ l(order.created_at, format: :default) }に購入"
+      - if order.is_order_success
+        span = "#{ l(order.updated_at, format: :default) }にお届け完了"
+      - else
+        span 現在、注文中です。
+      strong = product.name
+      small = "#{ product.point }pt"
+
+- if current_user.room_id.blank?
+  |現在、ルームに所属していません。ルーム申請してみましょう！
+  = link_to 'ルーム申請する', new_room_request_path(current_user), class: 'btn btn-primary'
+- elsif @order_histories.blank?
+  |現在、注文はありません。
