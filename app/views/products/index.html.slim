@@ -1,18 +1,12 @@
 h1 商品一覧
 - if current_user.room_id.blank?
- |現在、ルームに所属していません。ルーム申請してみましょう！
- = link_to 'ルーム申請する', new_room_request_path(current_user), class: 'btn btn-primary'
+  = render partial:'component/common/no_room'
 - elsif @products.blank?
-  |現在、商品がありません。商品をリクエストしてみましょう！
-  / TODO: 商品リクエスト完成したらここのパス変える
-  = link_to '商品をリクエストする', new_admin_product_path(current_user), class: 'btn btn-primary'
+  = render partial:'component/common/no_product'
 - else
-  - @products.each do |product|
-      div class="card" style="width: 18rem;" id="product-#{ product.id }"
-        = image_tag product.product_img, class: "card-img-top product_img", alt: "カードの画像"
-        div class="card-body"
-          h5 class="card-title" = product.name
-          p class="card-title" = product.point
-          = link_to '購入', create_modal_buy_path(product), remote: true, class: 'btn btn-primary'
+  = render partial:'component/common/card', collection: @products, as: 'product', locals: { type: '購入' }
 
 div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"
+= link_to '商品をリクエストする', new_product_request_path, class: 'btn btn-primary', id: 'request-btn'
+
+= render partial: 'component/common/point_panel', locals: { point: @point }

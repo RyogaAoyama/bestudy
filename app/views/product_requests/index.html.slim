@@ -1,0 +1,10 @@
+h1 リクエスト一覧
+- if current_user.room_id.blank?
+  = render partial:'component/common/no_room'
+- elsif @products.blank?
+  |欲しい物をリクエストしてみましょう！
+  = link_to '商品をリクエストする', new_product_request_path, class: 'btn btn-primary', id: 'plus'
+- else
+  = render partial:'component/common/card', collection: @products, as: 'product', locals: { type: '取り消し' }
+
+= render partial: 'component/common/point_panel', locals: { point: @point }

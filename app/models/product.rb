@@ -38,4 +38,17 @@ class Product < ApplicationRecord
       end
     end
   end
+
+  # デフォルト値の設定
+  def setup(user)
+    self.user_id = user.id if user_id.blank?
+    self.room_id = user.room_id if room_id.blank?
+    self.point = 100 if point.blank?
+    
+    unless product_img.attached?
+      File.open('public/default.jpg') do |f|
+        self.product_img.attach(io: f, filename: "default.jpg")
+      end
+    end
+  end
 end

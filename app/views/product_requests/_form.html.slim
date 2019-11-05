@@ -1,0 +1,15 @@
+= form_with model: product, url: product_requests_path, local: true do |f|
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: 'form-control', id: 'name'
+    p = get_validate_msg( product, :name )
+
+    = f.label :product_img
+    = f.file_field :product_img, class: 'form-control', onchange: 'imagePrev(event)', id: 'product_img'
+    p = get_validate_msg( product, :product_img )
+
+    - if product.product_img.attached?
+      = image_tag product.product_img, id: 'prev'
+    - else
+      img#prev
+  = f.submit 'リクエスト', class: 'btn btn-primary'

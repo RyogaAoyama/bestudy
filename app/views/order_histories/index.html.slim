@@ -14,7 +14,6 @@ div class="list-group"
       small = "#{ product.point }pt"
 
 - if current_user.room_id.blank?
-  |現在、ルームに所属していません。ルーム申請してみましょう！
-  = link_to 'ルーム申請する', new_room_request_path(current_user), class: 'btn btn-primary'
+  = render partial:'component/common/no_room'
 - elsif @order_histories.blank?
   |現在、注文はありません。

@@ -1,0 +1,12 @@
+div class="card" style="width: 18rem;" id="product-#{ product.id }"
+  = image_tag product.product_img, class: "card-img-top product_img", alt: "カードの画像", id: "img-#{ product.id }"
+  div class="card-body"
+    h5 class="card-title" = product.name
+    p class="card-title" = product.point
+    - case type
+    - when '編集'
+      = link_to '編集', edit_admin_product_path(product.id), class: "btn btn-primary"
+    - when '購入'
+      = link_to '購入', create_modal_buy_path(product), remote: true, class: 'btn btn-primary'
+    - when '取り消し'
+      = link_to '取り消し', destroy_product_request_path(product), method: :delete, class: "btn btn-danger"
