@@ -1,8 +1,6 @@
 FactoryBot.define do
   factory :special_point do
-    room { nil }
-    user { nil }
-    message { "MyString" }
-    point { 1 }
+    message { "頑張った" }
+    point { 200 }
   end
 end
