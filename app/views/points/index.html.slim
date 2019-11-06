@@ -1,2 +1,9 @@
-h1 Points#index
-p Find me in app/views/points/index.html.slim
+h1 付与ポイント一覧
+= render partial: 'component/common/all_point_panel', locals: { point: @point }
+div class="list-group"
+  - @point_notices.each do |point_notice|
+    = link_to point_path(point_notice), class: "list-group-item list-group-item-action", id: "point-notice-#{ point_notice.id }" do
+      span = l(point_notice.created_at, format: :times)
+      p = "#{ point_notice.room.user.name }から#{ point_notice.get_point }pt付与されました。"
+- if @point_notices.blank?
+  |現在、ポイントの付与はありません。

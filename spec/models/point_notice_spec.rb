@@ -5,7 +5,7 @@ RSpec.describe PointNotice, type: :model do
     context 'タイプが１の場合' do
       let(:point_notice) { FactoryBot.build(:point_notice, type: 1) }
       it 'ポイントの付与理由が成績' do
-        expect(point_notice.detail).to eq '成績が評価され、ポイントが付与されました'
+        expect(point_notice.detail).to eq '成績が評価され、ポイントが付与されました。'
       end
     end
 
@@ -19,7 +19,7 @@ RSpec.describe PointNotice, type: :model do
     context 'タイプが３の場合' do
       let(:point_notice) { FactoryBot.build(:point_notice, type: 3) }
       it 'ポイントの付与理由がテスト入力' do
-        expect(point_notice.detail).to eq 'テスト結果が評価され、ポイントが付与されました'
+        expect(point_notice.detail).to eq 'テスト結果が評価され、ポイントが付与されました。'
       end
     end
   end

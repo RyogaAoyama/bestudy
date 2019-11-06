@@ -1,2 +1,10 @@
-h1 Points#show
-p Find me in app/views/points/show.html.slim
+= "#{ @point_notice.room.user.name }から#{ @point_notice.get_point }pt付与されました。"
+div
+  strong 付与理由
+  p = @point_notice.detail
+div
+  - if @point_notice.special_point_id
+    strong ルームからのメッセージ
+    p = SpecialPoint.find(@point_notice.special_point_id).message
+small = l(@point_notice.created_at, format: :times)
+= link_to '戻る', points_path, class: 'btn btn-primary'
