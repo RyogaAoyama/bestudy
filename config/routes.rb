@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'goods/index'
   namespace :admin do
     resources :rooms
     resources :acounts do
@@ -63,6 +64,7 @@ Rails.application.routes.draw do
   resources :order_histories, only: [:index]
   resources :product_requests, only: [:index, :new, :create]
   resources :points, only: [:index, :show]
+  resources :goods, only: [:index, :create, :destroy]
   delete 'product_requests/:id', to: 'product_requests#destroy', as: 'destroy_product_request'
   post 'product/:id/buys/create', to: 'buys#create', as: 'buys'
   get 'product/:id/buys/create_modal', to: 'buys#create_modal', as: 'create_modal_buy'

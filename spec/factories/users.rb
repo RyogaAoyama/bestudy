@@ -39,6 +39,24 @@ FactoryBot.define do
     end
   end
 
+  # ポイントも同時に作成するように修正
+  factory :new_nomal_user2, class: User do
+    association :secret_question, factory: :new_secret_question
+    sequence(:name, 3) { |i| "テストユーザー#{ i }" }
+    sequence(:login_id, 3) { |i| "test_user#{ i }" }
+    sequence(:password, 3) { |i| "test_user#{ i }" }
+    answer { "大元小学校" }
+    is_admin { false }
+    after(:create) do |user|
+      # プロフィール写真生成
+      File.open('public/test.jpg') do |f|
+        user.image.attach(io: f, filename: "test.jpg")
+      end
+      # ポイント生成
+      create(:point, user_id: user.id)
+    end
+  end
+
   factory :new_admin_user, class: User do
     association :secret_question, factory: :new_secret_question2
     name { "管理ユーザー１" }
