@@ -1,2 +1,11 @@
-h1 Goods#index
-p Find me in app/views/goods/index.html.slim
+h1 お気に入り一覧
+- if current_user.room_id.blank?
+  = render partial:'component/common/no_room'
+- elsif @products.blank?
+  |現在、お気に入りは登録されていません。
+- else
+  = render partial:'component/common/card', collection: @products, as: 'product', locals: { type: '購入' }
+
+div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"
+
+= render partial: 'component/common/point_panel', locals: { point: @point }

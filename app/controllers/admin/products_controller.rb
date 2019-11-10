@@ -1,8 +1,6 @@
 class Admin::ProductsController < ApplicationController
   def index
-    product_ids = owner_room&.product&.where(is_deleted: false).pluck(:id)
-    product_request = ProductRequest.where(product_id: product_ids).pluck(:product_id)
-    @products = owner_room&.product&.where(is_deleted: false).where.not(id: product_request)
+    @products = Product.not_delete(owner_room).not_request
   end
 
   def new

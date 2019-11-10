@@ -12,7 +12,19 @@ class A
   def test_method
     a = 1/0
   end
+
+  def a_method(str)
+    return str
+  end
 end
 # a = A.new
 # a.error_method
- p !6.negative?
+
+a = A.new
+
+p "hello#{ a.a_method("aaa")}"
+if a&.b_method?
+  p 'true'
+else
+  p 'false'
+end

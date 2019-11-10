@@ -37,4 +37,10 @@ class ApplicationController < ActionController::Base
   def session_destroy
     session.delete(:id) if session[:id]
   end
+
+  # flashをリセットする
+  def clear_flash
+    flash[:notice] = nil
+    flash[:alert] = nil
+  end
 end

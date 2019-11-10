@@ -8,5 +8,12 @@ div class="card" style="width: 18rem;" id="product-#{ product.id }"
       = link_to '編集', edit_admin_product_path(product.id), class: "btn btn-primary"
     - when '購入'
       = link_to '購入', create_modal_buy_path(product), remote: true, class: 'btn btn-primary'
+      / good前
+      = link_to goods_path(user_id: current_user.id, product_id: product.id), class: 'good-wrap float-right', remote: true, method: :post do
+        img src='/no-good.svg' class="good-icon #{ no_good_active(product) }" id='js-no-good-#{ product.id }' onclick="goodActive(#{ product.id })"
+      / good後
+      = link_to good_path(product, user_id: current_user.id, product_id: product.id), class: 'good-wrap float-right', remote: true, method: :delete do
+        img src='/good.svg' class='good-icon #{ good_active(product) }' id='js-good-#{ product.id }' onclick="goodActive(#{ product.id })"
     - when '取り消し'
       = link_to '取り消し', destroy_product_request_path(product), method: :delete, class: "btn btn-danger"
+

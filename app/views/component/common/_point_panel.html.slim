@@ -6,6 +6,5 @@ div id="point-menu-wrap"
       p class="card-text" = "#{ point.point }pt"
   - unless current_page?(product_requests_path)
     = link_to 'リクエスト一覧', product_requests_path, class: 'btn btn-primary'
-    / TODO: お気に入り一覧できたらパス変更する
-  - unless current_page?(product_requests_path)
-    = link_to 'お気に入り一覧', product_requests_path, class: 'btn btn-primary'
+  - unless current_page?(goods_path)
+    = link_to 'お気に入り一覧', goods_path, class: 'btn btn-primary'
