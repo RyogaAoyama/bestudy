@@ -36,7 +36,7 @@ class User < ApplicationRecord
     create.validates :password, allow_blank: true,
                                 format: { with: /\A[a-zA-Z_0-9]*\z/, message: 'は半角文字で入力してください' }
     create.validates :password, allow_blank: true,
-                                format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d_]+\z/, message: 'は英数字を含めてください' },
+                                format: { with: /\A(?=.*?[a-zA-Z])(?=.*?\d)[a-zA-Z\d_]+\z/, message: 'は英数字を含めてください' },
                                 length: { in: 8..40, message: 'は8文字以上40文字以内で入力してください' }
   end
 

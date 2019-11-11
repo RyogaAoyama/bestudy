@@ -3,10 +3,12 @@ h1 商品一覧
   = render partial:'component/common/no_room'
 - elsif @products.blank?
   = render partial:'component/common/no_product'
+  = link_to '商品をリクエストする', new_product_request_path, class: 'btn btn-primary', id: 'request-btn'
 - else
   = render partial:'component/common/card', collection: @products, as: 'product', locals: { type: '購入' }
 
 div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"
-= link_to '商品をリクエストする', new_product_request_path, class: 'btn btn-primary', id: 'request-btn'
+
+
 
 = render partial: 'component/common/point_panel', locals: { point: @point }

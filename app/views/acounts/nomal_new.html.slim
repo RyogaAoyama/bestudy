@@ -36,5 +36,8 @@ h1 アカウント作成
       = f.label :image
       = f.file_field :image, id: 'image', class: 'form-control', onchange: 'imagePrev(event)'
       p = get_validate_msg( @user, :image )
+
+    div
+      img id='prev'
       
     = f.submit nil, class: 'btn btn-primary'

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  get 'goods/index'
+  namespace :common do
+    resources :notices, only:[:index, :show]
+  end
   namespace :admin do
     resources :rooms
     resources :acounts do

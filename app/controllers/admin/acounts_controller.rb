@@ -97,9 +97,8 @@ class Admin::AcountsController < ApplicationController
   def destroy
     room_id = owner_room.id
     if current_user.destroy
-      p User.where(room_id: room_id).update_all(room_id: '')
-      p "aaa"
-      p Point.where(room_id: room_id).update_all(point: 0, total: 0)
+      User.where(room_id: room_id).update_all(room_id: '')
+      Point.where(user_id: current_user).update_all(point: 0, total: 0)
       flash[:alert] = 'アカウントを削除しました。ご利用ありがとうございました！'
       redirect_to root_path
       session[:id] = nil

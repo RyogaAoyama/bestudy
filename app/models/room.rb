@@ -29,7 +29,7 @@ class Room < ApplicationRecord
   def self.user_exit?(user)
     user.transaction do
       user.delivery.destroy_all
-      user.good.destroy_all
+      user.goods.destroy_all
       user.notice.destroy_all
       user.order_history.destroy_all
       user.point_notice.destroy_all
