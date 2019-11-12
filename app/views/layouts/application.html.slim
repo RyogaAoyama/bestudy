@@ -26,10 +26,8 @@ html
           = link_to '特別ポイント入力', admin_special_points_path
           = link_to '申請承諾', admin_room_requests_path
           = link_to 'ユーザー一覧', admin_room_users_path
-          = link_to 'お知らせ', common_notices_path
           - if current_user.image.attached?
             = image_tag current_user.image, class: "rounded-circle", width: "33", height: "33"
-          = link_to image_tag('/notice.svg', width: '33'), common_notices_path, id: 'notice'
         // 一般
         - else
           = link_to 'リクエスト一覧', product_requests_path
@@ -41,7 +39,6 @@ html
           = link_to current_user.name, acount_path(current_user), id: 'user_name'
           - if current_user.image.attached?
             = image_tag current_user.image, class: "rounded-circle", width: "33", height: "33"
-          = link_to image_tag('/notice.svg', width: '33'), common_notices_path, id: 'notice'
 
 
 
