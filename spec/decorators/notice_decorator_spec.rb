@@ -1,20 +1,13 @@
-require "rails_helper"
+require 'rails_helper'
 
 describe NoticeDecorator do
+  let(:user) { FactoryBot.create(:new_nomal_user) }
+  subject { decorate(notice).disp_notice }
 
-  let(:user) { FactoryBot.build(:new_nomal_user2) }
-  subject { decorate( notice ).notice_disp }
   context 'type: 1' do
     let(:notice) { FactoryBot.build(:notice, :room_request_ok, user_id: user.id) }
     it 'ルーム承諾お知らせ' do
       is_expected.to eq 'ルーム申請が承諾されました！'
-    end
-  end
-
-  context 'type: 2' do
-    let(:notice) { FactoryBot.build(:notice, :product_request_ok, user_id: user.id) }
-    it '商品リクエスト承諾お知らせ' do
-      is_expected.to eq 'リクエストした商品が採用されました'
     end
   end
 
@@ -36,6 +29,13 @@ describe NoticeDecorator do
     let(:notice) { FactoryBot.build(:notice, :product_request_send, user_id: user.id) }
     it '商品リクエストのお知らせ' do
       is_expected.to eq "#{ user.name }から商品リクエストが届いてます。"
+    end
+  end
+
+  context 'type: 2' do
+    let(:notice) { FactoryBot.build(:notice, :product_request_ok, user_id: user.id) }
+    it '商品リクエスト承諾お知らせ' do
+      is_expected.to eq 'リクエストした商品が採用されました'
     end
   end
 end

@@ -1,2 +1,2 @@
-h1 Common::Notices#index
-p Find me in app/views/common/notices/index.html.slim
+h1 お知らせ一覧
+= render partial: "component/common/list", locals: { notices: @notices } 
