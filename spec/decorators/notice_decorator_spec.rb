@@ -1,10 +1,9 @@
-require "rails_helper"
+require 'rails_helper'
 
 describe NoticeDecorator do
-
   let(:user) { FactoryBot.create(:new_nomal_user) }
-  subject { decorate( notice ).disp_notice }
-  
+  subject { decorate(notice).disp_notice }
+
   context 'type: 1' do
     let(:notice) { FactoryBot.build(:notice, :room_request_ok, user_id: user.id) }
     it 'ルーム承諾お知らせ' do
@@ -25,7 +24,7 @@ describe NoticeDecorator do
       is_expected.to eq "#{ user.name }が商品を購入しました。商品を届けましょう！"
     end
   end
-  
+
   context 'type: 5' do
     let(:notice) { FactoryBot.build(:notice, :product_request_send, user_id: user.id) }
     it '商品リクエストのお知らせ' do

@@ -12,7 +12,7 @@ describe 'お知らせ機能' do
   end
 
   it 'お知らせ項目が全て表示されている' do
-    find("#notice").click
+    find('#notice').click
     expect(page).to have_content notice.created_at.strftime('%Y/%m/%d %H:%M')
     expect(page).to have_content notice.disp_notice
   end
@@ -20,7 +20,7 @@ describe 'お知らせ機能' do
   context 'お知らせがない場合' do
     let(:notice) { '' }
     it 'お知らせなしのメッセージを表示' do
-      find("#notice").click
+      find('#notice').click
       expect(page).to have_content '現在、お知らせはありません'
     end
   end
