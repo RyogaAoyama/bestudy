@@ -1,8 +1,0 @@
-
-div class="list-group"
-  - notices.each do |notice|
-    div class="list-group-item"
-      small = l(notice.updated_at, format: :times)
-      strong = notice.disp_notice
-  - if notices.blank?
-    |現在、お知らせはありません
