@@ -34,6 +34,16 @@ class RoomRequestsController < ApplicationController
     end
   end
 
+  def destroy
+    if Room.user_exit?(current_user)
+      flash[:alert] = "ルームから脱退しました"
+      redirect_to root_path
+    else
+      flash[:alert] = '削除に失敗しました。時間をおいて再度お試しください。'
+      redirect_to root_path acount_path(current_user)
+    end
+  end
+
   private
 
   def room_requets_params

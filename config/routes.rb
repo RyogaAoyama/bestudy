@@ -59,7 +59,7 @@ Rails.application.routes.draw do
   get 'products/:id/request', to: 'product#request', as: 'product_request'
   get 'products/:id/history', to: 'product#history', as: 'product_history'
 
-  resources :room_requests, only: [:new, :create]
+  resources :room_requests, only: [:new, :create, :destroy]
   get 'room_request/new/create_modal', to: 'room_requests#create_modal', as: 'create_modal_room_request'
   resources :acounts
   resources :products, only: [:index]

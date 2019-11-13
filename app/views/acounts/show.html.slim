@@ -6,7 +6,10 @@ div ="ID：#{ current_user.login_id }"
 = link_to 'プロフィール編集', edit_profile_admin_acount_path(current_user), name: 'user_name' ,class: 'btn btn-primary'
 = link_to 'パスワード変更', authentication_admin_acount_path(current_user), class: 'btn btn-primary'
 = link_to '秘密の質問', authentication_question_admin_acount_path(current_user), class: 'btn btn-primary'
-= link_to 'ルーム編集', admin_room_path(current_user), class: 'btn btn-primary'
-= link_to 'アカウント削除', destroy_modal_admin_acount_path(current_user), remote: true, class: 'btn btn-danger'
-= link_to 'ルーム申請', new_room_request_path(current_user), class: 'btn btn-primary'
+= link_to 'アカウント削除', acount_path(current_user), class: 'btn btn-danger', method: :delete
+- if current_user.room_id.present?
+  = link_to 'ルーム脱退', room_request_path(current_user), class: 'btn btn-danger', method: :delete
+- else
+  = link_to 'ルーム申請', new_room_request_path(current_user), class: 'btn btn-primary'
+
 div id="destroy-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"

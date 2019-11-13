@@ -24,9 +24,20 @@ class AcountsController < ApplicationController
 
       session[:id] = @user.id
       flash[:notice] = "登録が完了しました。ようこそ！#{ @user.name }さん！"
-      redirect_to products_path(@user)
+      redirect_to products_url(@user)
     else
       render :nomal_new
+    end
+  end
+
+  def destroy
+    if current_user.destroy
+      flash[:alert] = 'アカウントを削除しました。ご利用ありがとうございました！'
+      redirect_to root_path
+      session[:id] = nil
+    else
+      flash[:alert] = '削除に失敗しました。時間をおいて再度お試しください。'
+      redirect_to acount_url(current_user)
     end
   end
 
